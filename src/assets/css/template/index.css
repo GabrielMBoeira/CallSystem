@@ -1,0 +1,115 @@
+@font-face {
+   font-family: 'BalooThambi2';
+   src: url(src/assets/css/fonts/BalooThambi2-Bold.ttf);
+ }
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+body {
+   display: grid;
+   grid-template-columns: 250px 1fr;
+   grid-template-rows: 110px 1fr 60px;
+   grid-template-areas:
+      'header header'
+      'aside main'
+      'aside footer';
+   height: 100vh;
+}
+
+header {
+   grid-area: header;
+   background: linear-gradient(90deg, rgba(145,191,183,1) 0%, rgba(134,170,217,1) 33%, rgba(146,189,236,1) 100%);
+}
+
+.header {
+   display: flex;
+   justify-content: space-between;
+   box-shadow: 3px 3px 5px 0px rgba(50, 50, 53, 0.75);
+}
+
+.title-group {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.header .title{
+   font-family: 'BalooThambi2';
+   font-size: 3.5rem;
+   font-weight: 1000;
+   text-shadow: 3px 3px 0px rgba(150, 150, 150, 0.78);
+   margin: 0;
+}
+
+.header .subtitle {
+   font-family: 'BalooThambi2';
+   font-size: 1.5rem;
+   font-weight: 1000;
+   text-shadow: 3px 3px 0px rgba(150, 150, 150, 0.78);
+   margin: 0;
+}
+
+.dropdown {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.dropdown-button span {
+   font-weight: bold;
+   font-size: 1.2rem;
+}
+
+.icofont-simple-down {
+   font-size: 1.4rem;
+}
+
+.dropdown-content {
+   background-color: #fff;
+   height: 30px;
+   width: 180px;
+}
+
+.dropdown-content:hover {
+   background-color: #ddd;
+   height: 30px;
+   width: 180px;
+}
+
+.nav-list {
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   list-style: none;
+}
+
+.nav-item a {
+   color: #000;
+   text-decoration: none;
+   font-weight: bold;
+   font-size: 1.1rem;
+}
+
+.nav-item a:hover {
+   color: #000;
+   text-decoration: none;
+   font-weight: bold;
+}
+
+aside {
+   grid-area: aside;
+}
+
+main {
+   grid-area: main;
+}
+
+footer {
+   grid-area: footer;
+}
