@@ -20,30 +20,35 @@
             <h1 class="title">Call System</h1>
             <h2 class="subtitle">Atendimento de chamados</h2>
         </div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Ações
-                        </a>
-                        <div class="dropdown-menu mt-1" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
+        <div class="dropdown mr-5">
+            <div class="dropdown-button">
+                <span>Login: Gabriel Boeira</span>
+                <i class="icofont-simple-down"></i>
+            </div>
+            <div class="dropdown-content">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Configurações</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Sair</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Digite a placa..." aria-label="Search">
-                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="icofont-search-1"></i></button>
-                </form>
             </div>
-        </nav>
-
+        </div>
     </header>
-    <aside class="aside"></aside>
+
+    <aside class="aside">
+        <form class="form-inline mt-4">
+            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar NF-e" aria-label="Search">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="icofont-search-1"></i></button>
+        </form>
+        <button type="button" class="btn btn-primary">Primary</button>
+
+        <!-- <div class="icofont-truck-alt icon-menu"></div>
+            <a href="">Cadastrar veículo</a> -->
+    </aside>
+
     <main class="main"></main>
     <footer class="footer"></footer>
 </body>
