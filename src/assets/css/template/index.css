@@ -19,6 +19,7 @@ body {
 
 header { 
    grid-area: header;
+   z-index: 1;
 }
 
 .title-group {
@@ -66,6 +67,7 @@ header {
 .dropdown-button:hover {
    background-color: rgb(184, 179, 179);
 }
+
 
 .dropdown-content {
    position: absolute;
@@ -152,6 +154,7 @@ aside .icon-menu {
 main {
    grid-area: main;
 }
+
 
 footer {
    grid-area: footer;

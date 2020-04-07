@@ -62,7 +62,13 @@
     </aside>
 
     <main class="main">
-    
+        <div class="content-title">
+            <i class="icofont-network"></i>
+            <div>
+                <h1>Título</h1>
+                <h2>subtitulo</h2>
+            </div>
+        </div>
     </main>
     <footer class="footer"></footer>
 </body>
