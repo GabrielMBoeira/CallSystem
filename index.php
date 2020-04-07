@@ -43,12 +43,27 @@
             <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar NF-e" aria-label="Search">
             <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="icofont-search-1"></i></button>
         </form> 
-        
-        <!-- <div class="menu-aside btn p-2 mt-4 bg-primary text-white rounded">
-            <div class="icofont-truck-alt icon-menu "></div>
+        <button class="btn btn-aside mt-4">
+            <div class="icofont-truck-alt icon-menu mr-2"></div>
             <a href="">Cadastrar veículo</a>
-        </div> -->
-
+        </button>
+        <button class="btn btn-aside mt-2">
+            <div class="icofont-truck-alt icon-menu mr-2"></div>
+            <a href="">Cadastrar veículo</a>
+        </button>
+        <button class="btn btn-aside mt-2">
+            <div class="icofont-truck-alt icon-menu mr-2"></div>
+            <a href="">Cadastrar veículo</a>
+        </button>
+        <button class="btn btn-aside mt-2">
+            <div class="icofont-truck-alt icon-menu mr-2"></div>
+            <a href="">Cadastrar veículo</a>
+        </button>
+        <button class="btn btn-aside mt-2">
+            <div class="icofont-truck-alt icon-menu mr-2"></div>
+            <a href="">Cadastrar veículo</a>
+        </button>
+     
     </aside>
 
     <main class="main"></main>

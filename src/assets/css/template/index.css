@@ -108,7 +108,44 @@ aside.aside {
    border-right: solid 1px #ddd;
 }
 
+aside .btn-aside {
+   display: flex;
+   width: 275px;
+   height: 50px;
+   align-items: center;
+   justify-content: center;
+   border-radius: 5px;
+   background-color: rgb(33, 105, 240);
+}
 
+aside .btn-aside:hover {
+   display: flex;
+   width: 275px;
+   height: 50px;
+   align-items: center;
+   justify-content: center;
+   border-radius: 5px;
+   background-color: rgb(36, 7, 161);
+   transition: 1s;
+}
+
+aside .icon-menu {
+   color: #ddd;
+   font-size: 1.6rem;
+}
+
+.btn-aside a {
+   color: #ddd;
+   text-decoration: none;
+   font-weight: bold;
+}
+
+.btn-aside a:hover {
+   color: rgb(245, 237, 237);
+   text-decoration: none;
+   font-weight: bold;
+}
+ 
 main {
    grid-area: main;
 }
