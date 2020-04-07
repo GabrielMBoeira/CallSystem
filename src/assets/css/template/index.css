@@ -115,7 +115,7 @@ aside .btn-aside {
    align-items: center;
    justify-content: center;
    border-radius: 5px;
-   background-color: rgb(33, 105, 240);
+   background-color: rgb(22, 74, 170);
 }
 
 aside .btn-aside:hover {
@@ -125,7 +125,7 @@ aside .btn-aside:hover {
    align-items: center;
    justify-content: center;
    border-radius: 5px;
-   background-color: rgb(36, 7, 161);
+   background-color: rgb(39, 39, 41);
    transition: 1s;
 }
 
