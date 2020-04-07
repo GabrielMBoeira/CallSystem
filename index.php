@@ -42,11 +42,13 @@
         <form class="form-inline mt-4">
             <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar NF-e" aria-label="Search">
             <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="icofont-search-1"></i></button>
-        </form>
-        <button type="button" class="btn btn-primary">Primary</button>
+        </form> 
+        
+        <!-- <div class="menu-aside btn p-2 mt-4 bg-primary text-white rounded">
+            <div class="icofont-truck-alt icon-menu "></div>
+            <a href="">Cadastrar veículo</a>
+        </div> -->
 
-        <!-- <div class="icofont-truck-alt icon-menu"></div>
-            <a href="">Cadastrar veículo</a> -->
     </aside>
 
     <main class="main"></main>

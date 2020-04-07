@@ -108,21 +108,6 @@ aside.aside {
    border-right: solid 1px #ddd;
 }
 
-/* .btn-menu-aside {
-   display: flex;
-   width: 90%;
-   font-weight: 700;
-}
-
-.btn-menu-aside a{
-   text-decoration: none;
-   color: #ddd;
-   margin-left: 10px;
-}
-
-.icon-menu {
-  font-size: 30px;
-} */
 
 main {
    grid-area: main;
