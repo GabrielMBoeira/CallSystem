@@ -15,7 +15,9 @@ body {
    height: 100vh;
 }
 
-header {
+
+
+header { 
    grid-area: header;
 }
 
@@ -24,6 +26,7 @@ header {
    flex-direction: column;
    justify-content: center;
    align-items: center;
+   flex-grow: 1;
 }
 
 .title {

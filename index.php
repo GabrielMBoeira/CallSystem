@@ -42,7 +42,7 @@
         <form class="form-inline mt-4">
             <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar NF-e" aria-label="Search">
             <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="icofont-search-1"></i></button>
-        </form> 
+        </form>
         <button class="btn btn-aside mt-4">
             <div class="icofont-live-support icon-menu mr-2"></div>
             <a href="">Chamados em aberto</a>
@@ -61,7 +61,9 @@
         </button>
     </aside>
 
-    <main class="main"></main>
+    <main class="main">
+    
+    </main>
     <footer class="footer"></footer>
 </body>
 
