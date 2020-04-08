@@ -70,8 +70,67 @@
                     <h2>subtitulo</h2>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header">
+                    Chamados em aberto
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Chamado</th>
+                                <th>Placa</th>
+                                <th>Status</th>
+                                <th>Atuante</th>
+                                <th>Tempo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>123</th>
+                                <td>QHG4147</td>
+                                <td>aberto</td>
+                                <td>comercial</td>
+                                <td>00:00:00</td>
+                            </tr>
+                            <tr>
+                                <th>123</th>
+                                <td>QHG4147</td>
+                                <td>aberto</td>
+                                <td>comercial</td>
+                                <td>00:00:00</td>
+                            </tr>
+                            <tr>
+                                <th>123</th>
+                                <td>QHG4147</td>
+                                <td>aberto</td>
+                                <td>comercial</td>
+                                <td>00:00:00</td>
+                            </tr>
+                            <tr>
+                                <th>123</th>
+                                <td>QHG4147</td>
+                                <td>aberto</td>
+                                <td>comercial</td>
+                                <td>00:00:00</td>
+                            </tr>
+                            <tr>
+                                <th>123</th>
+                                <td>QHG4147</td>
+                                <td>aberto</td>
+                                <td>comercial</td>
+                                <td>00:00:00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+
+                </div>
+            </div>
         </div>
     </main>
+
     <footer class="footer"></footer>
 </body>
 

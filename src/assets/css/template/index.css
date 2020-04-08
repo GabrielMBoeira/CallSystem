@@ -154,22 +154,36 @@ aside .icon-menu {
  
 main {
    grid-area: main;
+   padding: 10px;
    background-color: #777;
 }
 
 .content {
-   margin: 10px;
-   background-color: #ddd;
+   background-color: #fff;    
+   height: 100%;
 }
 
-.content-title {
-   margin: 50px;
-   background-color: green;
+.card {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: calc(100% - 120px);
 }
 
+.card-header {
+   width: 100%;
+}
+
+.card-body {
+   width: 100%;
+}
+
+.card-footer {
+   width: 100%;
+}
 
 
 footer {
    grid-area: footer;
-   background-color: blueviolet;
+   background: linear-gradient(to right, #373b44, #4286f4);
 }
