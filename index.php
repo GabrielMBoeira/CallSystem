@@ -46,6 +46,10 @@
         </form>
         <button class="btn btn-aside mt-4">
             <div class="icofont-live-support icon-menu mr-2"></div>
+            <a href="">Cadastrar chamados</a>
+        </button>
+        <button class="btn btn-aside mt-2">
+            <div class="icofont-folder-open icon-menu mr-2"></div>
             <a href="">Chamados em aberto</a>
         </button>
         <button class="btn btn-aside mt-2">
@@ -67,7 +71,7 @@
 
     <footer class="footer">
         <div class="footer-assign">
-            Desenvolvido por Gabriel Boeira
+            Desenvolvido por Gabriel e Ana Machado Boeira
         </div>
     </footer>
 </body>
