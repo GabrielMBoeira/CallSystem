@@ -13,6 +13,7 @@ body {
       'aside main'
       'aside footer';
    height: 100vh;
+   margin: 0;
 }
 
 
@@ -153,9 +154,22 @@ aside .icon-menu {
  
 main {
    grid-area: main;
+   background-color: #777;
 }
+
+.content {
+   margin: 10px;
+   background-color: #ddd;
+}
+
+.content-title {
+   margin: 50px;
+   background-color: green;
+}
+
 
 
 footer {
    grid-area: footer;
+   background-color: blueviolet;
 }

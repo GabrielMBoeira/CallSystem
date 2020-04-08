@@ -62,11 +62,13 @@
     </aside>
 
     <main class="main">
-        <div class="content-title">
-            <i class="icofont-network"></i>
-            <div>
-                <h1>Título</h1>
-                <h2>subtitulo</h2>
+        <div class="content">
+            <div class="content-title">
+                <i class="icofont-network"></i>
+                <div>
+                    <h1>Título</h1>
+                    <h2>subtitulo</h2>
+                </div>
             </div>
         </div>
     </main>
