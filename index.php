@@ -64,16 +64,12 @@
     <main class="main">
         <div class="content">
             <div class="content-title">
-                <i class="icofont-network"></i>
+                <i class="icofont-network mr-3 my-5"></i>
                 <div>
-                    <h1>Título</h1>
-                    <h2>subtitulo</h2>
+                    <h1>Chamados em aberto</h1>
                 </div>
             </div>
             <div class="card">
-                <div class="card-header">
-                    Chamados em aberto
-                </div>
                 <div class="card-body">
                     <table class="table table-hover">
                         <thead>
@@ -83,6 +79,7 @@
                                 <th>Status</th>
                                 <th>Atuante</th>
                                 <th>Tempo</th>
+                                <th>Editar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -92,6 +89,7 @@
                                 <td>aberto</td>
                                 <td>comercial</td>
                                 <td>00:00:00</td>
+                                <td><a href="" class="btn rounded-circle"><i class="icofont-edit-alt"></i></a></td>
                             </tr>
                             <tr>
                                 <th>123</th>
@@ -99,6 +97,7 @@
                                 <td>aberto</td>
                                 <td>comercial</td>
                                 <td>00:00:00</td>
+                                <td><a href="" class="btn rounded-circle"><i class="icofont-edit-alt"></i></a></td>
                             </tr>
                             <tr>
                                 <th>123</th>
@@ -106,6 +105,7 @@
                                 <td>aberto</td>
                                 <td>comercial</td>
                                 <td>00:00:00</td>
+                                <td><a href="" class="btn rounded-circle"><i class="icofont-edit-alt"></i></a></td>
                             </tr>
                             <tr>
                                 <th>123</th>
@@ -113,6 +113,7 @@
                                 <td>aberto</td>
                                 <td>comercial</td>
                                 <td>00:00:00</td>
+                                <td><a href="" class="btn rounded-circle"><i class="icofont-edit-alt"></i></a></td>
                             </tr>
                             <tr>
                                 <th>123</th>
@@ -120,6 +121,15 @@
                                 <td>aberto</td>
                                 <td>comercial</td>
                                 <td>00:00:00</td>
+                                <td><a href="" class="btn rounded-circle"><i class="icofont-edit-alt"></i></a></td>
+                            </tr>
+                            <tr>
+                                <th>123</th>
+                                <td>QHG4147</td>
+                                <td>aberto</td>
+                                <td>comercial</td>
+                                <td>00:00:00</td>
+                                <td><a href="" class="btn rounded-circle"><i class="icofont-edit-alt"></i></a></td>
                             </tr>
                         </tbody>
                     </table>

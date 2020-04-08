@@ -163,6 +163,16 @@ main {
    height: 100%;
 }
 
+.icofont-network {
+   font-size: 2.8rem;
+}
+
+.content-title {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
 .card {
    display: flex;
    justify-content: center;
@@ -176,6 +186,10 @@ main {
 
 .card-body {
    width: 100%;
+}
+
+a.btn.rounded-circle {
+   background-color: rgb(182, 231, 231);
 }
 
 .card-footer {
