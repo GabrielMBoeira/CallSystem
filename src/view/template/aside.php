@@ -5,7 +5,7 @@
         </form>
         <button class="btn btn-aside mt-4">
             <div class="icofont-live-support icon-menu mr-2"></div>
-            <a href="">Cadastrar chamados</a>
+            <a href="register_called.php">Cadastrar chamados</a>
         </button>
         <button class="btn btn-aside mt-2">
             <div class="icofont-folder-open icon-menu mr-2"></div>

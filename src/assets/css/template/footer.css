@@ -1,0 +1,12 @@
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #fff;
+ }
+ 
+ .footer-assign {
+    margin-right: 30px;
+ }
