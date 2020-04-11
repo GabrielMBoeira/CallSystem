@@ -1,12 +1,16 @@
+
 <?php
-require_once('src/view/template/header.php');
-require_once('src/view/template/aside.php');
+require_once('src/view/template_view/header.php');
+require_once('src/view/template_view/aside.php');
 ?>
+
+<link rel="stylesheet" href="src/assets/css/template_css/template.css">
+<link rel="stylesheet" href="src/assets/css/template_css/attendance.css">
 
 <main class="main">
     <div class="content mb-5">
         <div class="content-title">
-            <i class="icofont-network mr-3 my-5"></i>
+            <i class="icon icofont-network mr-3 my-5"></i>
             <div>
                 <h1>Chamados em aberto</h1>
             </div>
@@ -43,6 +47,6 @@ require_once('src/view/template/aside.php');
 </main>
 
 <?php
-require_once('src/view/template/footer.php');
+require_once('src/view/template_view/footer.php');
 ?>
 

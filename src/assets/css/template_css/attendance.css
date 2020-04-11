@@ -1,4 +1,5 @@
-main {
+
+  main {
     grid-area: main;
     padding: 10px;
     background-color: #777;
@@ -9,7 +10,7 @@ main {
     height: 100%;
  }
  
- .icofont-network {
+ .icon {
     font-size: 2.8rem;
  }
  
@@ -37,5 +38,3 @@ main {
  a.btn.rounded-circle {
     background-color: rgb(182, 231, 231);
  }
- 
- 

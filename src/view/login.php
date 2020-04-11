@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../src/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../src/assets/css/template/login.css">
+    <link rel="stylesheet" href="../src/assets/css/template_css/login.css">
     <title>Call System</title>
 </head>
 

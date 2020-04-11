@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+ }
+ 
+ body {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    grid-template-rows: 150px 1fr 60px;
+    grid-template-areas: 
+       'header header'
+       'aside main'
+       'aside footer';
+    height: 100vh;
+    margin: 0;
+ }
+ 
+ 
+ header { 
+     grid-area: header;
+     z-index: 1;
+  }
+  
+  .title-group {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     flex-grow: 1;
+  }
+  
+  .title {
+     font-size: 3.8rem;
+     font-weight: 500;
+     color: #fff;
+  }
+   
+  .subtitle {
+     font-size: 2.2rem;
+     font-weight: 400;
+     color: #fff;
+  }
+  
+  .header {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     background: linear-gradient(to right, #373b44, #4286f4);
+     box-shadow: 2px 2px 11px 0px rgba(50, 50, 50, 0.75);
+  }
+  
+  .dropdown-button {
+     background-color:#fff;
+     border-radius: 5px;
+     padding: 10px;
+     font-size: 1.2rem;
+     font-weight: bold;
+  }
+  
+  .dropdown:hover .dropdown-content {
+     display: block;
+     margin: 0;
+     padding: 0;
+  }
+  
+  .dropdown-button:hover {
+     background-color: rgb(184, 179, 179);
+  }
+  
+  
+  .dropdown-content {
+     position: absolute;
+     min-width: 100%;
+     background-color: #fff;
+     display: none;
+  }
+  
+  .nav-item {
+     font-size: 1.1rem;
+  }
+  
+  .nav-item:hover {
+     background-color: rgb(121, 115, 115);
+  }
+  
+  .nav-link {
+     font-size: 1.1rem;
+     text-decoration: none;
+     cursor: pointer;
+     color: #000;
+     font-weight: 400;
+  }
+  
+  .nav-link:hover {
+     color: #ddd;
+  }
+  
+  header.header ul {
+     list-style: none;
+  }
+  
+  aside {
+     grid-area: aside;
+  }
+ 
+ aside.aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border-right: solid 1px #ddd;
+ }
+ 
+ aside .btn-aside {
+     display: flex;
+     width: 275px;
+     height: 50px;
+     align-items: center;
+     justify-content: center;
+     border-radius: 5px;
+     background-color: rgb(22, 74, 170);
+     color: #fff;
+  }
+  
+  aside .btn-aside:hover {
+     display: flex;
+     width: 275px;
+     height: 50px;
+     align-items: center;
+     justify-content: center;
+     border-radius: 5px;
+     background-color: rgb(39, 39, 41);
+     color: #fff;
+  }
+  
+  aside .icon-menu {
+     color: #ddd;
+     font-size: 1.6rem;
+  }
+  
+  footer {
+     grid-area: footer;
+     background: linear-gradient(to right, #373b44, #4286f4);
+  }
+ 
+  .footer {
+     display: flex;
+     justify-content: flex-end;
+     align-items: center;
+     font-size: 1.1rem;
+     font-weight: 500;
+     color: #fff;
+  }
+  
+  .footer-assign {
+     margin-right: 30px;
+  }
