@@ -70,13 +70,12 @@ require_once('src/view/template_view/aside.php');
 </main>
 
 <script type="text/javascript">
-    //Adicionando mascara no input placa
-    $("#placa").mask("SSS0000");
 
     //Transformanto input placa em uppercase
     $("#placa").change(function() {
         $(this).val($(this).val().toUpperCase());
     });
+    
 </script>
 
 
