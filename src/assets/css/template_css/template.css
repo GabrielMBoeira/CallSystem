@@ -16,7 +16,6 @@
     margin: 0;
  }
  
- 
  header { 
      grid-area: header;
      z-index: 1;

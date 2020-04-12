@@ -12,7 +12,7 @@ require_once('src/view/template_view/aside.php');
         <div class="content-title">
             <i class="icon icofont-network mr-3 my-5"></i>
             <div>
-                <h1>Chamados em aberto</h1>
+                <h1>Chamados ativos</h1>
             </div>
         </div>
         <div class="card">

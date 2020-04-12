@@ -5,22 +5,18 @@
     </form>
     <a class="btn btn-aside mt-4" href="attendance.php">
         <i class="icofont-folder-open icon-menu mr-2"></i>
-        Chamados em aberto
+        Chamados ativos
     </a>
     <a class="btn btn-aside mt-2" href="register_called.php">
         <div class="icofont-live-support icon-menu mr-2"></div>
         Cadastrar chamados
     </a>
-    <a class="btn btn-aside mt-2" href="">
-        <div class="icofont-database icon-menu mr-2"></div>
+    <a class="btn btn-aside mt-2" href="find_appointments.php">
+        <div class="icofont-search-2 icon-menu mr-2"></div>
         Pesquisar chamados
     </a>
     <a class="btn btn-aside mt-2" href="">
-        <div class="icofont-database icon-menu mr-2"></div>
-        Cadastrar nota fiscal
-    </a>
-    <a class="btn btn-aside mt-2" href="">
-        <div class="icofont-database icon-menu mr-2"></div>
+        <div class="icofont-truck-alt icon-menu mr-2"></div>
         Cadastrar veículo
     </a>
 </aside>
