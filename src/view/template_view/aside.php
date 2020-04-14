@@ -19,7 +19,4 @@
         <div class="icofont-truck-alt icon-menu mr-2"></div>
         Cadastrar veículo
     </a>
-    <a class="btn btn-aside mt-2" href="conexao.php">
-        Conexao
-    </a>
 </aside>
