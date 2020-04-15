@@ -96,7 +96,7 @@ if (count($_POST) > 0) {
 
 <script type="text/javascript">
     //Transformanto input placa em uppercase
-    $("#placa").change(function() {
+    $("#motorista").change(function() {
         $(this).val($(this).val().toUpperCase());
     });
 
