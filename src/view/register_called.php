@@ -5,56 +5,56 @@
 require_once('src/view/template_view/header.php');
 require_once('src/view/template_view/aside.php');
 
-if (count($_POST) > 0) {
-    $dados = $_POST;
-    $erros = [];
+// if (count($_POST) > 0) {
+//     $dados = $_POST;
+//     $erros = [];
 
-    if (trim($dados['chamado']) === "") {
-        $erros['chamado'] = 'Chamado é obrigatório';
-    }
+//     if (trim($dados['chamado']) === "") {
+//         $erros['chamado'] = 'Chamado é obrigatório';
+//     }
 
-    if (trim($dados['nota-fiscal']) === "") {
-        $erros['nota-fiscal'] = 'Nota fiscal é obrigatória';
-    }
+//     if (trim($dados['nota-fiscal']) === "") {
+//         $erros['nota-fiscal'] = 'Nota fiscal é obrigatória';
+//     }
 
-    if (trim($dados['placa']) === "") {
-        $erros['placa'] = 'Placa é obrigatória';
-    }
+//     if (trim($dados['placa']) === "") {
+//         $erros['placa'] = 'Placa é obrigatória';
+//     }
 
-    if (trim($dados['status']) === "") {
-        $erros['status'] = 'Status é obrigatório';
-    }
+//     if (trim($dados['status']) === "") {
+//         $erros['status'] = 'Status é obrigatório';
+//     }
 
-    if (trim($dados['atuante']) === "") {
-        $erros['atuante'] = 'Atuante é obrigatório';
-    }
+//     if (trim($dados['atuante']) === "") {
+//         $erros['atuante'] = 'Atuante é obrigatório';
+//     }
 
-    if (trim($dados['ocorrencia']) === "") {
-        $erros['ocorrencia'] = 'Ocorrência é obrigatória';
-    }
+//     if (trim($dados['ocorrencia']) === "") {
+//         $erros['ocorrencia'] = 'Ocorrência é obrigatória';
+//     }
 
-    // if (!count($erros)) {
-    //     require_once "src/db/conexao.php";
+//     // if (!count($erros)) {
+//     //     require_once "src/db/conexao.php";
 
-    //     $sql = "INSERT INTO veiculos (placa, motorista, telefone) VALUES (?, ?, ?)";
+//     //     $sql = "INSERT INTO veiculos (placa, motorista, telefone) VALUES (?, ?, ?)";
 
-    //     $conexao = novaConexao();
-    //     $stmt = $conexao->prepare($sql);
+//     //     $conexao = novaConexao();
+//     //     $stmt = $conexao->prepare($sql);
 
-    //     $params = [
-    //         $dados['placa'],
-    //         $dados['motorista'],
-    //         $dados['telefone'],
-    //     ];
+//     //     $params = [
+//     //         $dados['placa'],
+//     //         $dados['motorista'],
+//     //         $dados['telefone'],
+//     //     ];
 
-    //     $stmt->bind_param("sss", ...$params);
+//     //     $stmt->bind_param("sss", ...$params);
 
-    //     if ($stmt->execute()) {
-    //         unset($dados); //Depois de inserir limpar os dados
-    //     }
-    //     $conexao->close();
-    // }
-}
+//     //     if ($stmt->execute()) {
+//     //         unset($dados); //Depois de inserir limpar os dados
+//     //     }
+//     //     $conexao->close();
+//     // }
+// }
 
 ?>
 
@@ -84,19 +84,24 @@ if (count($_POST) > 0) {
                         <label for="placa">Placa</label>
                         <select class="form-control" name="placa">
                             <?php
-                            // $sql = "SELECT placa FROM veiculos";
+                            
+                            require_once('src/db/conexao.php');
 
-                            // $resultado = $conexao->query($sql);
+                            $sql = "SELECT placa FROM veiculos";
 
-                            // if ($resultado->num_rows > 0) {
-                            //     while ($row = $resultado->fetch_assoc()) {
-                                    
-                            //     }
-                            // } elseif ($conexao->error) {
-                            //     echo "Erro: " . $conexao->error;
-                            // }
+                            $conexao = novaConexao();
+                            $resultado = $conexao->query($sql);
 
-                         
+                            if ($resultado->num_rows > 0) {
+                                while ($row = $resultado->fetch_array()) {
+                                    $placas = $row['placa'];
+                                    echo "<option value='$placas'>$placas</option>";
+                                }
+                            } elseif ($conexao->error) {
+                                echo "Erro: " . $conexao->error;
+                            }
+
+                            $conexao->close();
                             ?>
                         </select>
                     </div>
