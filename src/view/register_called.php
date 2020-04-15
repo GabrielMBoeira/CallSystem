@@ -34,7 +34,7 @@ require_once('src/view/template_view/aside.php');
 //     }
 
 //     // if (!count($erros)) {
-//     //     require_once "src/db/conexao.php";
+        require_once "src/db/conexao.php";
 
 //     //     $sql = "INSERT INTO veiculos (placa, motorista, telefone) VALUES (?, ?, ?)";
 
@@ -83,26 +83,26 @@ require_once('src/view/template_view/aside.php');
                     <div class="form-group col-md-4">
                         <label for="placa">Placa</label>
                         <select class="form-control" name="placa">
-                            <?php
+                            <option value="selecione">Selecione</option>
                             
-                            require_once('src/db/conexao.php');
+                            <?php
+                            //Buscando placas cadastradas no banco de dados 
 
                             $sql = "SELECT placa FROM veiculos";
-
                             $conexao = novaConexao();
                             $resultado = $conexao->query($sql);
 
                             if ($resultado->num_rows > 0) {
                                 while ($row = $resultado->fetch_array()) {
-                                    $placas = $row['placa'];
-                                    echo "<option value='$placas'>$placas</option>";
+                                    $placa = $row['placa'];
+                                    echo "<option value='$placa'>$placa</option>";
                                 }
                             } elseif ($conexao->error) {
                                 echo "Erro: " . $conexao->error;
                             }
-
                             $conexao->close();
                             ?>
+                            
                         </select>
                     </div>
                 </div>
