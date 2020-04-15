@@ -8,6 +8,11 @@
 require_once('src/view/template_view/header.php');
 require_once('src/view/template_view/aside.php');
 
+require_once "src/db/conexao.php";
+// require_once "src/db/validation.php"; VER IMPORTAÇÃO
+
+
+
 if (count($_POST) > 0) {
     $dados = $_POST;
     $erros = [];
@@ -26,7 +31,6 @@ if (count($_POST) > 0) {
 
 
     if (!count($erros)) {
-        require_once "src/db/conexao.php";
 
         $sql = "INSERT INTO veiculos (placa, motorista, telefone) VALUES (?, ?, ?)";
 
@@ -96,7 +100,7 @@ if (count($_POST) > 0) {
 
 <script type="text/javascript">
     //Transformanto input placa em uppercase
-    $("#motorista").change(function() {
+    $("#placa").change(function() {
         $(this).val($(this).val().toUpperCase());
     });
 
