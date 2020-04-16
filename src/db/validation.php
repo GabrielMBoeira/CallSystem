@@ -11,4 +11,4 @@ function existPlacaDB($placa) {
 
     $conexao->close();
     return $placa;
-}
+} //APLICAR VALIDAÇÕES NO REGISTER_VEHICLE

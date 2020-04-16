@@ -5,56 +5,61 @@
 require_once('src/view/template_view/header.php');
 require_once('src/view/template_view/aside.php');
 
-// if (count($_POST) > 0) {
-//     $dados = $_POST;
-//     $erros = [];
+require_once "src/db/conexao.php";
 
-//     if (trim($dados['chamado']) === "") {
-//         $erros['chamado'] = 'Chamado é obrigatório';
-//     }
+if (count($_POST) > 0) {
+    $dados = $_POST;
+    $erros = [];
 
-//     if (trim($dados['nota-fiscal']) === "") {
-//         $erros['nota-fiscal'] = 'Nota fiscal é obrigatória';
-//     }
+    if (trim($dados['chamado']) === "") {
+        $erros['chamado'] = 'Chamado é obrigatório';
+    }
 
-//     if (trim($dados['placa']) === "") {
-//         $erros['placa'] = 'Placa é obrigatória';
-//     }
+    if (trim($dados['nota-fiscal']) === "") {
+        $erros['nota-fiscal'] = 'Nota fiscal é obrigatória';
+    }
 
-//     if (trim($dados['status']) === "") {
-//         $erros['status'] = 'Status é obrigatório';
-//     }
+    if (trim($dados['placa']) === "") {
+        $erros['placa'] = 'Placa é obrigatória';
+    }
 
-//     if (trim($dados['atuante']) === "") {
-//         $erros['atuante'] = 'Atuante é obrigatório';
-//     }
+    if (trim($dados['status']) === "") {
+        $erros['status'] = 'Status é obrigatório';
+    }
 
-//     if (trim($dados['ocorrencia']) === "") {
-//         $erros['ocorrencia'] = 'Ocorrência é obrigatória';
-//     }
+    if (trim($dados['atuante']) === "") {
+        $erros['atuante'] = 'Atuante é obrigatório';
+    }
 
-//     // if (!count($erros)) {
-        require_once "src/db/conexao.php";
+    if (trim($dados['ocorrencia']) === "") {
+        $erros['ocorrencia'] = 'Ocorrência é obrigatória';
+    }
 
-//     //     $sql = "INSERT INTO veiculos (placa, motorista, telefone) VALUES (?, ?, ?)";
+    if (!count($erros)) {
 
-//     //     $conexao = novaConexao();
-//     //     $stmt = $conexao->prepare($sql);
+        $sql = "INSERT INTO chamados (nota_fiscal, placa, status, atuante, ocorrencia, id_placa) 
+                VALUES (?, ?, ?, ?, ?, ?)";
 
-//     //     $params = [
-//     //         $dados['placa'],
-//     //         $dados['motorista'],
-//     //         $dados['telefone'],
-//     //     ];
+        $conexao = novaConexao();
+        $stmt = $conexao->prepare($sql);
 
-//     //     $stmt->bind_param("sss", ...$params);
+        $params = [
+            $dados['nota-fiscal'],
+            $dados['placa'],
+            $dados['status'],
+            $dados['atuante'],
+            $dados['ocorrencia'],
+            $dados['id_placa'],
+        ];
 
-//     //     if ($stmt->execute()) {
-//     //         unset($dados); //Depois de inserir limpar os dados
-//     //     }
-//     //     $conexao->close();
-//     // }
-// }
+        $stmt->bind_param("sss", ...$params);
+
+        if ($stmt->execute()) {
+            unset($dados); //Depois de inserir limpar os dados
+        }
+        $conexao->close();
+    }
+}
 
 ?>
 
@@ -84,10 +89,9 @@ require_once('src/view/template_view/aside.php');
                         <label for="placa">Placa</label>
                         <select class="form-control" name="placa">
                             <option value="selecione">Selecione</option>
-                            
+
                             <?php
                             //Buscando placas cadastradas no banco de dados 
-
                             $sql = "SELECT placa FROM veiculos";
                             $conexao = novaConexao();
                             $resultado = $conexao->query($sql);
@@ -102,7 +106,7 @@ require_once('src/view/template_view/aside.php');
                             }
                             $conexao->close();
                             ?>
-                            
+
                         </select>
                     </div>
                 </div>
