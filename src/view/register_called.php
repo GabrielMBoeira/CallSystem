@@ -43,16 +43,18 @@ if (count($_POST) > 0) {
         $conexao = novaConexao();
         $stmt = $conexao->prepare($sql);
 
+        $valoresPlacas = explode('|', $_POST['placa']);
+        
         $params = [
             $dados['nota-fiscal'],
-            $dados['placa'],
+            $valoresPlacas[1],
             $dados['status'],
             $dados['atuante'],
             $dados['ocorrencia'],
-            $dados['id_placa'],
+            $valoresPlacas[0],
         ];
 
-        $stmt->bind_param("sss", ...$params);
+        $stmt->bind_param("sssssi", ...$params);
 
         if ($stmt->execute()) {
             unset($dados); //Depois de inserir limpar os dados
@@ -60,7 +62,6 @@ if (count($_POST) > 0) {
         $conexao->close();
     }
 }
-
 ?>
 
 <script src="src/assets/js/jquery.3.5.0.min.js"></script>
@@ -92,14 +93,15 @@ if (count($_POST) > 0) {
 
                             <?php
                             //Buscando placas cadastradas no banco de dados 
-                            $sql = "SELECT placa FROM veiculos";
+                            $sql = "SELECT * FROM veiculos";
                             $conexao = novaConexao();
                             $resultado = $conexao->query($sql);
 
                             if ($resultado->num_rows > 0) {
                                 while ($row = $resultado->fetch_array()) {
                                     $placa = $row['placa'];
-                                    echo "<option value='$placa'>$placa</option>";
+                                    $id_placa = $row['id'];
+                                    echo "<option value='$id_placa|$placa'>$placa</option>";
                                 }
                             } elseif ($conexao->error) {
                                 echo "Erro: " . $conexao->error;
@@ -135,6 +137,24 @@ if (count($_POST) > 0) {
                     <button class="btn btn-lg btn-primary mt-3">
                         Salvar
                     </button>
+ 
+                    <?php 
+                    
+                    $valoresPlacas = explode('|', $_POST['placa']);
+                    echo $dados['nota-fiscal'];
+                    echo '<br>';
+                    echo $valoresPlacas[1];
+                    echo '<br>';
+                    echo $dados['status'];
+                    echo '<br>';
+                    echo $dados['atuante'];
+                    echo '<br>';
+                    echo $dados['ocorrencia'];
+                    echo '<br>';
+                    echo $valoresPlacas[0];
+                    
+                    ?>
+
                 </div>
             </form>
         </div>
