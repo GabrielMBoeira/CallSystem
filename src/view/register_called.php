@@ -33,7 +33,7 @@ if (count($_POST) > 0) {
 
     if (!count($erros)) {
 
-        $sql = "insert into chamados (nota_fiscal, placa, status, atuante, ocorrencia, id_placa) values (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO chamados (nota_fiscal, placa, status, atuante, ocorrencia, id_placa) VALUES (?, ?, ?, ?, ?, ?)";
 
         $conexao = novaConexao();
         $stmt = $conexao->prepare($sql);
