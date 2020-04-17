@@ -19,7 +19,7 @@ if (count($_POST) > 0) {
         $erros['placa'] = 'Placa é obrigatória';
     }
 
-    if (trim($dados['status']) === "") {
+    if (trim($dados['status']) === "selecione") {
         $erros['status'] = 'Status é obrigatório';
     }
 
@@ -73,21 +73,17 @@ if (count($_POST) > 0) {
         <div class="card">
             <form action="#" method="post">
                 <div class="form-row mt-3">
-                    <div class="form-group col-md-4">
-                        <label for="chamado">Chamado</label>
-                        <input type="text" name="chamado" id="chamado" placeholder="Núm. chamado" class="form-control" disabled>
-                    </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <label for="nota-fiscal">Nota fiscal</label>
                         <input type="text" name="nota-fiscal" id="nota-fiscal" placeholder="Nota fiscal" class="form-control <?= $erros['nota-fiscal'] ? 'is-invalid' : '' ?>">
                         <div class="invalid-feedback">
                             <?= $erros['nota-fiscal'] ?>
                         </div>
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <label for="placa">Placa</label>
                         <select class="form-control <?= $erros['placa'] ? 'is-invalid' : '' ?>" name="placa">
-                            <option value="selecione">Selecione</option>
+                            <option value="selecione">Selecione a placa</option>
 
                             <?php
                             //Buscando placas cadastradas no banco de dados 
@@ -113,19 +109,20 @@ if (count($_POST) > 0) {
                     </div>
                 </div>
                 <div class="form-row mt-3">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <label for="status">Status</label>
                         <select class="form-control <?= $erros['status'] ? 'is-invalid' : '' ?>" name="status" id="status">
+                            <option value="selecione" selected>Selecione o status</option>
                             <option value="ativo">Ativo</option>
                         </select>
                         <div class="invalid-feedback">
                             <?= $erros['status'] ?>
                         </div>
                     </div>
-                    <div class="form-group col-md-8">
+                    <div class="form-group col-md-6">
                         <label for="atuante">Atuante</label>
                         <select class="form-control <?= $erros['atuante'] ? 'is-invalid' : '' ?>" name="atuante" id="atuante">
-                            <option value="selecione" selected>Selecione</option>
+                            <option value="selecione" selected>Selecione o atuante</option>
                             <option value="setor1">Setor 1</option>
                             <option value="setor2">Setor 2</option>
                             <option value="setor3">Setor 3</option>
