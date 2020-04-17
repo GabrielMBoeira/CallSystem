@@ -37,7 +37,7 @@ if (count($_POST) > 0) {
         $conexao = novaConexao();
         $stmt = $conexao->prepare($sql);
 
-        $params = [
+        $params = [ 
             $dados['placa'],
             $dados['motorista'],
             $dados['telefone'],

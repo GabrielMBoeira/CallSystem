@@ -15,7 +15,7 @@ if (count($_POST) > 0) {
         $erros['nota-fiscal'] = 'Nota fiscal é obrigatória';
     }
 
-    if (trim($dados['placa']) === "selecionado") {
+    if (trim($dados['placa']) === "selecione") {
         $erros['placa'] = 'Placa é obrigatória';
     }
 
@@ -23,7 +23,7 @@ if (count($_POST) > 0) {
         $erros['status'] = 'Status é obrigatório';
     }
 
-    if (trim($dados['atuante']) === "") {
+    if (trim($dados['atuante']) === "selecione") {
         $erros['atuante'] = 'Atuante é obrigatório';
     }
 
@@ -39,7 +39,7 @@ if (count($_POST) > 0) {
         $stmt = $conexao->prepare($sql);
 
         $optionsPlacas = explode('|', $dados['placa']);
-        
+
         $params = [
             $dados['nota-fiscal'],
             $optionsPlacas[1],
@@ -79,11 +79,14 @@ if (count($_POST) > 0) {
                     </div>
                     <div class="form-group col-md-4">
                         <label for="nota-fiscal">Nota fiscal</label>
-                        <input type="text" name="nota-fiscal" id="nota-fiscal" placeholder="Nota fiscal" class="form-control">
+                        <input type="text" name="nota-fiscal" id="nota-fiscal" placeholder="Nota fiscal" class="form-control <?= $erros['nota-fiscal'] ? 'is-invalid' : '' ?>">
+                        <div class="invalid-feedback">
+                            <?= $erros['nota-fiscal'] ?>
+                        </div>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="placa">Placa</label>
-                        <select class="form-control" name="placa">
+                        <select class="form-control <?= $erros['placa'] ? 'is-invalid' : '' ?>" name="placa">
                             <option value="selecione">Selecione</option>
 
                             <?php
@@ -103,30 +106,41 @@ if (count($_POST) > 0) {
                             }
                             $conexao->close();
                             ?>
-
                         </select>
+                        <div class="invalid-feedback">
+                            <?= $erros['placa'] ?>
+                        </div>
                     </div>
                 </div>
                 <div class="form-row mt-3">
                     <div class="form-group col-md-4">
                         <label for="status">Status</label>
-                        <select class="form-control" name="status" id="status">
+                        <select class="form-control <?= $erros['status'] ? 'is-invalid' : '' ?>" name="status" id="status">
                             <option value="ativo">Ativo</option>
                         </select>
+                        <div class="invalid-feedback">
+                            <?= $erros['status'] ?>
+                        </div>
                     </div>
                     <div class="form-group col-md-8">
                         <label for="atuante">Atuante</label>
-                        <select class="form-control" name="atuante" id="atuante">
+                        <select class="form-control <?= $erros['atuante'] ? 'is-invalid' : '' ?>" name="atuante" id="atuante">
                             <option value="selecione" selected>Selecione</option>
                             <option value="setor1">Setor 1</option>
                             <option value="setor2">Setor 2</option>
                             <option value="setor3">Setor 3</option>
                         </select>
+                        <div class="invalid-feedback">
+                            <?= $erros['atuante'] ?>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="ocorrencia">Ocorrência</label>
-                    <textarea class="form-control" name="ocorrencia" id="ocorrencia" rows="3"></textarea>
+                    <textarea class="form-control <?= $erros['ocorrencia'] ? 'is-invalid' : '' ?>" name="ocorrencia" id="ocorrencia" rows="3"></textarea>
+                    <div class="invalid-feedback">
+                        <?= $erros['ocorrencia'] ?>
+                    </div>
                 </div>
                 <div class="form-row btn-save  mt-3">
                     <button class="btn btn-lg btn-primary mt-3">
@@ -144,7 +158,6 @@ if (count($_POST) > 0) {
         $(this).val($(this).val().toUpperCase());
     });
 </script>
-
 
 <?php
 require_once('src/view/template_view/footer.php');
