@@ -11,15 +11,11 @@ if (count($_POST) > 0) {
     $dados = $_POST;
     $erros = [];
 
-    if (trim($dados['chamado']) === "") {
-        $erros['chamado'] = 'Chamado é obrigatório';
-    }
-
     if (trim($dados['nota-fiscal']) === "") {
         $erros['nota-fiscal'] = 'Nota fiscal é obrigatória';
     }
 
-    if (trim($dados['placa']) === "") {
+    if (trim($dados['placa']) === "selecionado") {
         $erros['placa'] = 'Placa é obrigatória';
     }
 
@@ -37,21 +33,20 @@ if (count($_POST) > 0) {
 
     if (!count($erros)) {
 
-        $sql = "INSERT INTO chamados (nota_fiscal, placa, status, atuante, ocorrencia, id_placa) 
-                VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "insert into chamados (nota_fiscal, placa, status, atuante, ocorrencia, id_placa) values (?, ?, ?, ?, ?, ?)";
 
         $conexao = novaConexao();
         $stmt = $conexao->prepare($sql);
 
-        $valoresPlacas = explode('|', $_POST['placa']);
+        $optionsPlacas = explode('|', $dados['placa']);
         
         $params = [
             $dados['nota-fiscal'],
-            $valoresPlacas[1],
+            $optionsPlacas[1],
             $dados['status'],
             $dados['atuante'],
             $dados['ocorrencia'],
-            $valoresPlacas[0],
+            $optionsPlacas[0]
         ];
 
         $stmt->bind_param("sssssi", ...$params);
@@ -137,24 +132,6 @@ if (count($_POST) > 0) {
                     <button class="btn btn-lg btn-primary mt-3">
                         Salvar
                     </button>
- 
-                    <?php 
-                    
-                    $valoresPlacas = explode('|', $_POST['placa']);
-                    echo $dados['nota-fiscal'];
-                    echo '<br>';
-                    echo $valoresPlacas[1];
-                    echo '<br>';
-                    echo $dados['status'];
-                    echo '<br>';
-                    echo $dados['atuante'];
-                    echo '<br>';
-                    echo $dados['ocorrencia'];
-                    echo '<br>';
-                    echo $valoresPlacas[0];
-                    
-                    ?>
-
                 </div>
             </form>
         </div>
