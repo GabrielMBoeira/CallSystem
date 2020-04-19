@@ -1,6 +1,7 @@
 <?php
 
-function existPlacaDB($placaDB) {
+function existVehicleDB($placaDB)
+{
     $sql = "SELECT * FROM veiculos WHERE placa = '$placaDB';";
     $conexao = novaConexao();
     $resultado = $conexao->query($sql);
@@ -10,7 +11,9 @@ function existPlacaDB($placaDB) {
     if ($resultado->num_rows > 0) {
         $current = $resultado;
     } else {
-         $current = null;
+        $current = null;
     }
-   return $current;
-} 
+    return $current;
+}
+
+

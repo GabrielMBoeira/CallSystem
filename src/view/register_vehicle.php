@@ -14,6 +14,7 @@ require_once "src/db/validation.php";
 if (count($_POST) > 0) {
     $dados = $_POST;
     $erros = [];
+    $msg = [];
 
     if (trim($dados['placa']) === "") {
         $erros['placa'] = 'Placa é obrigatória';
@@ -28,7 +29,7 @@ if (count($_POST) > 0) {
     }
 
 
-    if (!count($erros) && !existPlacaDB($dados['placa'])) {
+    if (!count($erros) && !existVehicleDB($dados['placa'])) {
 
 
         $sql = "INSERT INTO veiculos (placa, motorista, telefone) VALUES (?, ?, ?)";
@@ -48,9 +49,12 @@ if (count($_POST) > 0) {
             unset($dados); //Depois de inserir limpar os dados
         }
         $conexao->close();
+
+        $msg[] = '<div class="alert alert-primary" role="alert">Placa cadastrada com sucesso</div>';
+    } else {
+        $msg[] = '<div class="alert alert-danger" role="alert">Erro ao cadastrar: Placa já existe no banco de dados</div>';
     }
 }
-
 ?>
 
 <main class="main">
@@ -59,12 +63,12 @@ if (count($_POST) > 0) {
         <div class="content-title">
             <i class="icon icofont-truck-alt mr-3 my-5"></i>
             <div>
-                
                 <h1>Cadastrar Veículo</h1>
             </div>
         </div>
         <div class="card">
             <form action="#" method="post">
+                <?= $msg[0] ?>
                 <div class="form-row mt-3">
                     <div class="form-group col-md-4">
                         <label for="placa">Placa</label>
@@ -88,7 +92,7 @@ if (count($_POST) > 0) {
                         </div>
                     </div>
                 </div>
-                <div class="form-row btn-save  mt-3">
+                <div class="form-row btn-save mt-3">
                     <button class="btn btn-lg btn-primary mt-3">
                         Salvar
                     </button>
@@ -97,6 +101,8 @@ if (count($_POST) > 0) {
         </div>
     </div>
 </main>
+
+
 
 <script type="text/javascript">
     //Transformanto input placa em uppercase
