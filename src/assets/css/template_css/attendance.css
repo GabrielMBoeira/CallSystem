@@ -36,5 +36,7 @@
  }
  
  a.btn.rounded-circle {
-    background-color: rgb(182, 231, 231);
+    background-color: #ddd;
+    border: solid 1px #000;
+    color: #000;
  }

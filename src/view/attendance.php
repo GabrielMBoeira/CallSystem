@@ -66,7 +66,7 @@ $conexao->close();
                             <td><?= $registro['status']; ?></td>
                             <td><?= $registro['atuante']; ?></td>
                             <td>00:00:00</td>
-                            <td><a href="" class="btn rounded-circle"><i class="icofont-edit-alt"></i></a></td>
+                            <td><a href="call_edit.php?id=<?= $registro['id'] ?>" class="btn rounded-circle"><i class="icofont-edit-alt"></i></a></td>
                         </tr>
                         <?php endforeach ?>
                     </tbody>
