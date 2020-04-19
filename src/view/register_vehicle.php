@@ -9,9 +9,7 @@ require_once('src/view/template_view/header.php');
 require_once('src/view/template_view/aside.php');
 
 require_once "src/db/conexao.php";
-// require_once "src/db/validation.php"; VER IMPORTAÇÃO
-
-
+require_once "src/db/validation.php";
 
 if (count($_POST) > 0) {
     $dados = $_POST;
@@ -30,14 +28,15 @@ if (count($_POST) > 0) {
     }
 
 
-    if (!count($erros)) {
+    if (!count($erros) && !existPlacaDB($dados['placa'])) {
+
 
         $sql = "INSERT INTO veiculos (placa, motorista, telefone) VALUES (?, ?, ?)";
 
         $conexao = novaConexao();
         $stmt = $conexao->prepare($sql);
 
-        $params = [ 
+        $params = [
             $dados['placa'],
             $dados['motorista'],
             $dados['telefone'],
@@ -60,6 +59,7 @@ if (count($_POST) > 0) {
         <div class="content-title">
             <i class="icon icofont-truck-alt mr-3 my-5"></i>
             <div>
+                
                 <h1>Cadastrar Veículo</h1>
             </div>
         </div>
@@ -68,21 +68,21 @@ if (count($_POST) > 0) {
                 <div class="form-row mt-3">
                     <div class="form-group col-md-4">
                         <label for="placa">Placa</label>
-                        <input type="text" name="placa" id="placa" class="form-control <?= $erros['placa'] ? 'is-invalid' : ''?>" style="text-transform: uppercase" value="<?= $dados['placa'] ?>">
+                        <input type="text" name="placa" id="placa" class="form-control <?= $erros['placa'] ? 'is-invalid' : '' ?>" style="text-transform: uppercase">
                         <div class="invalid-feedback">
                             <?= $erros['placa'] ?>
                         </div>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="motorista">Motorista</label>
-                        <input type="text" name="motorista" id="motorista" class="form-control <?= $erros['motorista'] ? 'is-invalid' : ''?>" style="text-transform: uppercase" value="<?= $dados['motorista'] ?>">
+                        <input type="text" name="motorista" id="motorista" class="form-control <?= $erros['motorista'] ? 'is-invalid' : '' ?>" style="text-transform: uppercase">
                         <div class="invalid-feedback">
                             <?= $erros['motorista'] ?>
                         </div>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="telefone">Fone (Celular)</label>
-                        <input type="text" name="telefone" id="telefone" class="form-control <?= $erros['telefone'] ? 'is-invalid' : ''?> " value="<?= $dados['telefone'] ?>">
+                        <input type="text" name="telefone" id="telefone" class="form-control <?= $erros['telefone'] ? 'is-invalid' : '' ?> ">
                         <div class="invalid-feedback">
                             <?= $erros['telefone'] ?>
                         </div>

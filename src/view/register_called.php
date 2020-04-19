@@ -87,7 +87,7 @@ if (count($_POST) > 0) {
 
                             <?php
                             //Buscando placas cadastradas no banco de dados 
-                            $sql = "SELECT * FROM veiculos";
+                            $sql = "SELECT * FROM veiculos ORDER BY placa;";
                             $conexao = novaConexao();
                             $resultado = $conexao->query($sql);
 
