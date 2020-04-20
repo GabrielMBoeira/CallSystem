@@ -41,25 +41,27 @@ require_once "src/db/conexao.php";
 
 //Retornando chamados do banco de dados
 
-$id = $_GET['id'];
+if (isset($_GET['id'])) {
 
-echo $id;
-// $sql = "SELECT * FROM chamados WHERE id = '$id';";
+    $id = $_GET['id'];
 
-// $conexao = novaConexao();
-// $resultado = $conexao->query($sql);
+    $sql = "SELECT * FROM chamados WHERE id = '$id';";
 
-// $registros = [];
+    $conexao = novaConexao();
+    $resultado = $conexao->query($sql);
 
-// if($resultado->num_rows > 0) {
-//     while($row = $resultado->fetch_assoc()) { 
-//         $registros[] = $row;
-//     }
-// } elseif($conexao->error) {
-//     echo "Erro: " . $conexao->error;
-// }
+    $registros = [];
 
-// $conexao->close();
+    if ($resultado->num_rows > 0) {
+        while ($row = $resultado->fetch_assoc()) { 
+            $registros = $row;
+        }
+    } elseif ($conexao->error) {
+        echo "Erro: " . $conexao->error;
+    }
+
+    $conexao->close();
+}
 
 ?>
 
@@ -76,26 +78,25 @@ echo $id;
             </div>
         </div>
         <div class="card">
-            
             <form action="#" method="post">
                 <div class="form-row mt-3">
                     <div class="form-group col-md-6">
                         <label for="nota-fiscal">Nota fiscal</label>
-                        <input type="text" name="nota-fiscal" id="nota-fiscal" placeholder="Nota fiscal" class="form-control" value="<?= $registro['nota-fiscal'] ?>" disabled>
+                        <input type="text" name="nota-fiscal" id="nota-fiscal" placeholder="Nota fiscal" class="form-control" value="<?= $registros['nota_fiscal'] ?>" disabled>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="placa">Placa</label>
-                        <input type="text" name="placa" id="nota-fiscal" placeholder="Placa" class="form-control" value="<?= $registro['placa'] ?>" disabled>
+                        <input type="text" name="placa" id="nota-fiscal" placeholder="Placa" class="form-control" value="<?= $registros['placa'] ?>" disabled>
                     </div>
                 </div>
                 <div class="form-row mt-3">
                     <div class="form-group col-md-6">
                         <label for="status">Status</label>
-                        <input type="text" name="status" id="nota-fiscal" placeholder="Status" class="form-control" value="<?= $registro['status'] ?>" disabled>
+                        <input type="text" name="status" id="nota-fiscal" placeholder="Status" class="form-control" value="<?= $registros['status'] ?>" disabled>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="atuante">Atuante</label>
-                        <input type="text" name="atuante" id="nota-fiscal" placeholder="Atuante" class="form-control" value="<?= $registro['atuante'] ?>" disabled>
+                        <input type="text" name="atuante" id="nota-fiscal" placeholder="Atuante" class="form-control" value="<?= $registros['atuante'] ?>" disabled>
                     </div>
                 </div>
                 <div class="form-group">
