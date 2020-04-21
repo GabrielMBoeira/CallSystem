@@ -7,7 +7,7 @@ require_once('src/view/template_view/aside.php');
 
 require_once "src/db/conexao.php";
 
-//Retornando chamados do banco de dados
+//Retornando chamados do banco de dados e populando formulário
 if (isset($_GET['id'])) {
 
     $id = $_GET['id'];
@@ -30,6 +30,40 @@ if (isset($_GET['id'])) {
     $conexao->close();
 }
 
+// if (isset($_POST['btn-salvar'])) {
+
+//     $id_chamado = $_POST['chamado'];
+//     $nota_fiscal = $_POST['nota-fiscal'];
+//     $placa = $_POST['placa'];
+//     $id_placa = $_POST['id_placa'];
+//     $status = $_POST['status'];
+//     $atuante = $_POST['atuante'];
+//     $ocorrencia = $_POST['ocorrencia'];
+
+//     $sql = "INSERT INTO chamados (id, nota_fiscal, placa, status, atuante, ocorrencia, id_placa) VALUES (?, ?, ?, ?, ?, ?, ?);";
+
+//     $conexao = novaConexao();
+//     $stmt = $conexao->prepare($sql);
+
+//     $params = [
+//         $id_chamado,
+//         $nota_fiscal,
+//         $placa,
+//         $status,
+//         $atuante,
+//         $ocorrencia,
+//         $id_placa
+//     ];
+
+//     $stmt->bind_param('isssssi', ...$params);
+    
+//     if($stmt->execute()){
+//         unset($_POST);
+       
+//     }
+//     $conexao->close();
+// }
+
 ?>
 
 <script src="src/assets/js/jquery.3.5.0.min.js"></script>
@@ -45,7 +79,7 @@ if (isset($_GET['id'])) {
             </div>
         </div>
         <div class="card">
-            <form action="src/db/update_call.php" method="post">
+            <form action="#" method="post">
             <input type="hidden" name="id_placa" value="<?= $registros['id_placa']; ?>">
                 <div class="form-row mt-3">
                     <div class="form-group col-md-4">
