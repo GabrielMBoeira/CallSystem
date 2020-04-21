@@ -30,39 +30,38 @@ if (isset($_GET['id'])) {
     $conexao->close();
 }
 
-// if (isset($_POST['btn-salvar'])) {
+if (isset($_POST['btn-salvar'])) {
 
-//     $id_chamado = $_POST['chamado'];
-//     $nota_fiscal = $_POST['nota-fiscal'];
-//     $placa = $_POST['placa'];
-//     $id_placa = $_POST['id_placa'];
-//     $status = $_POST['status'];
-//     $atuante = $_POST['atuante'];
-//     $ocorrencia = $_POST['ocorrencia'];
+    $id_chamado = $_POST['chamado'];
+    $nota_fiscal = $_POST['nota-fiscal'];
+    $placa = $_POST['placa'];
+    $status = $_POST['status'];
+    $atuante = $_POST['atuante'];
+    $ocorrencia = $_POST['ocorrencia'];
+    $id_placa = $_POST['id_placa'];
 
-//     $sql = "INSERT INTO chamados (id, nota_fiscal, placa, status, atuante, ocorrencia, id_placa) VALUES (?, ?, ?, ?, ?, ?, ?);";
+    $sql = "INSERT INTO chamados (id, nota_fiscal, placa, status, atuante, ocorrencia, id_placa) VALUES (?, ?, ?, ?, ?, ?, ?);";
 
-//     $conexao = novaConexao();
-//     $stmt = $conexao->prepare($sql);
+    $conexao = novaConexao();
+    $stmt = $conexao->prepare($sql);
 
-//     $params = [
-//         $id_chamado,
-//         $nota_fiscal,
-//         $placa,
-//         $status,
-//         $atuante,
-//         $ocorrencia,
-//         $id_placa
-//     ];
+    $params = [
+        $id_chamado,
+        $nota_fiscal,
+        $placa,
+        $status,
+        $atuante,
+        $ocorrencia,
+        $id_placa
+    ];
 
-//     $stmt->bind_param('isssssi', ...$params);
-    
-//     if($stmt->execute()){
-//         unset($_POST);
-       
-//     }
-//     $conexao->close();
-// }
+    $stmt->bind_param('isssssi', ...$params);
+
+    if ($stmt->execute()) {
+        unset($_POST);
+    }
+    $conexao->close();
+}
 
 ?>
 
@@ -80,7 +79,7 @@ if (isset($_GET['id'])) {
         </div>
         <div class="card">
             <form action="#" method="post">
-            <input type="hidden" name="id_placa" value="<?= $registros['id_placa']; ?>">
+                <input type="hidden" name="id_placa" value="<?= $registros['id_placa']; ?>">
                 <div class="form-row mt-3">
                     <div class="form-group col-md-4">
                         <label for="chamado">Chamado</label>
@@ -114,8 +113,12 @@ if (isset($_GET['id'])) {
                         </select>
                     </div>
                 </div>
-                <div class="description" name="description">
-                <?= $registros['ocorrencia']; ?>
+                <div class="previous-description">
+                    <?=
+
+                        $registros['ocorrencia'];
+
+                    ?>
                 </div>
                 <div class="form-group">
                     <label for="ocorrencia">Ocorrência</label>
