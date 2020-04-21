@@ -7,40 +7,7 @@ require_once('src/view/template_view/aside.php');
 
 require_once "src/db/conexao.php";
 
-// if (count($_POST) > 0) {
-//     $dados = $_POST;
-
-//     $erros = [];
-
-
-//     if (trim($dados['ocorrencia']) === "") {
-//         $erros['ocorrencia'] = 'Ocorrência é obrigatória';
-//     }
-
-//     //Alterando ocorrencia
-//     if (!count($erros)) {
-
-//         $sql = "UPDATE chamados SET ocorrencia = ? WHERE id = ?;";
-
-//         $conexao = novaConexao();
-//         $stmt = $conexao->prepare($sql);
-
-//         $params = [
-//             $dados['ocorrencia'],
-//             $id = $_GET['id']
-//         ];
-
-//         $stmt->bind_param("si", ...$params);
-
-//         if ($stmt->execute()) {
-//             unset($dados); //Depois de inserir limpar os dados
-//         }
-//         $conexao->close();
-//     }
-// }
-
 //Retornando chamados do banco de dados
-
 if (isset($_GET['id'])) {
 
     $id = $_GET['id'];
@@ -53,7 +20,7 @@ if (isset($_GET['id'])) {
     $registros = [];
 
     if ($resultado->num_rows > 0) {
-        while ($row = $resultado->fetch_assoc()) { 
+        while ($row = $resultado->fetch_assoc()) {
             $registros = $row;
         }
     } elseif ($conexao->error) {
@@ -78,36 +45,53 @@ if (isset($_GET['id'])) {
             </div>
         </div>
         <div class="card">
-            <form action="#" method="post">
+            <form action="src/db/update_call.php" method="post">
+            <input type="hidden" name="id_placa" value="<?= $registros['id_placa']; ?>">
                 <div class="form-row mt-3">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
+                        <label for="chamado">Chamado</label>
+                        <input type="text" name="chamado" id="chamado" placeholder="Chamado" class="form-control" value="<?= $registros['id'] ?>" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
                         <label for="nota-fiscal">Nota fiscal</label>
                         <input type="text" name="nota-fiscal" id="nota-fiscal" placeholder="Nota fiscal" class="form-control" value="<?= $registros['nota_fiscal'] ?>" disabled>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label for="placa">Placa</label>
-                        <input type="text" name="placa" id="nota-fiscal" placeholder="Placa" class="form-control" value="<?= $registros['placa'] ?>" disabled>
+                        <input type="text" name="placa" id="placa" placeholder="Placa" class="form-control" value="<?= $registros['placa'] ?>" disabled>
                     </div>
                 </div>
                 <div class="form-row mt-3">
                     <div class="form-group col-md-6">
                         <label for="status">Status</label>
-                        <input type="text" name="status" id="nota-fiscal" placeholder="Status" class="form-control" value="<?= $registros['status'] ?>" disabled>
+                        <select class="form-control" name="status" id="status">
+                            <option value="selecione" selected>Selecione o status</option>
+                            <option value="ativo">Ativo</option>
+                            <option value="inativo">Inativo</option>
+                        </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="atuante">Atuante</label>
-                        <input type="text" name="atuante" id="nota-fiscal" placeholder="Atuante" class="form-control" value="<?= $registros['atuante'] ?>" disabled>
+                        <select class="form-control" name="atuante" id="atuante">
+                            <option value="selecione" selected>Selecione o atuante</option>
+                            <option value="setor1">Setor 1</option>
+                            <option value="setor2">Setor 2</option>
+                            <option value="setor3">Setor 3</option>
+                        </select>
                     </div>
+                </div>
+                <div class="description" name="description">
+                <?= $registros['ocorrencia']; ?>
                 </div>
                 <div class="form-group">
                     <label for="ocorrencia">Ocorrência</label>
-                    <textarea class="form-control <?= $erros['ocorrencia'] ? 'is-invalid' : '' ?>" name="ocorrencia" id="ocorrencia" rows="3"></textarea>
+                    <textarea class="form-control <?= $erros['ocorrencia'] ? 'is-invalid' : '' ?>" name="ocorrencia" id="ocorrencia" rows="3" value="<?= $registros['ocorrencia'] ?>"></textarea>
                     <div class="invalid-feedback">
                         <?= $erros['ocorrencia'] ?>
                     </div>
                 </div>
                 <div class="form-row btn-save  mt-3">
-                    <button class="btn btn-lg btn-primary mt-3">
+                    <button class="btn btn-lg btn-primary mt-3" name="btn-salvar">
                         Salvar
                     </button>
                 </div>
