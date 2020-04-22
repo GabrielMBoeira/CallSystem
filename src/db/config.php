@@ -15,10 +15,10 @@ function getLastChaveAdd1() {
         while ($row = $resultado->fetch_assoc()) {
             $registros = $row;
         }
+    } else {
+        $registros['MAX(chave)'] = 1; 
     }
     
     return $registros['MAX(chave)'] + 1;
 
 }
-
-echo getLastChaveAdd1();

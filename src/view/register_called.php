@@ -6,6 +6,9 @@ require_once('src/view/template_view/header.php');
 require_once('src/view/template_view/aside.php');
 
 require_once "src/db/conexao.php";
+require_once "src/db/config.php";
+
+date_default_timezone_set('America/Sao_Paulo');
 
 if (count($_POST) > 0) {
     $dados = $_POST;
@@ -33,23 +36,29 @@ if (count($_POST) > 0) {
 
     if (!count($erros)) {
 
-        $sql = "INSERT INTO chamados (nota_fiscal, placa, status, atuante, ocorrencia, id_placa) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO chamados (chave, num_chamado, nota_fiscal, placa, status, atuante, ocorrencia, id_placa) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         $conexao = novaConexao();
         $stmt = $conexao->prepare($sql);
 
+        
         $optionsPlacas = explode('|', $dados['placa']);
+        $num_chamado = $dados['data'].$dados['chave'];
+        
 
         $params = [
+            $dados['chave'], 
+            $num_chamado,
             $dados['nota-fiscal'],
-            $optionsPlacas[1],
+            $optionsPlacas[1],  
             $dados['status'],
             $dados['atuante'],
             $dados['ocorrencia'],
-            $optionsPlacas[0]
+            $optionsPlacas[0],
         ];
 
-        $stmt->bind_param("sssssi", ...$params);
+        $stmt->bind_param("issssssi", ...$params);
 
         if ($stmt->execute()) {
             unset($dados); //Depois de inserir limpar os dados
@@ -72,6 +81,8 @@ if (count($_POST) > 0) {
         </div>
         <div class="card">
             <form action="#" method="post">
+                <input type="hidden" name="data" value="<?= date('Ymd'); ?>">
+                <input type="hidden" name="chave" value="<?= getLastChaveAdd1() ?>">
                 <div class="form-row mt-3">
                     <div class="form-group col-md-6">
                         <label for="nota-fiscal">Nota fiscal</label>
