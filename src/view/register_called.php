@@ -72,7 +72,7 @@ if (count($_POST) > 0) {
 <script src="src/assets/js/jquery.mask.min.js"></script>
 
 <main class="main">
-    <div class="content mb-5">
+    <div class="content">
         <div class="content-title">
             <i class="icon icofont-ui-call mr-3 my-5"></i>
             <div>

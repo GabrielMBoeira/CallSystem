@@ -1,0 +1,36 @@
+main {
+   grid-area: main;
+   padding: 10px;
+   background-color: #777;
+}
+
+.content {
+   background-color: rgb(255, 255, 255);    
+   height: 100%;
+}
+
+.icon {
+   font-size: 2.8rem;
+}
+
+.content-title {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.card {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: (100% - 70px);
+}
+
+form {
+   width: 80%;
+}
+
+.btn-save {
+   display: flex;
+   justify-content: flex-end;
+}

@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="src/assets/css/template_css/template.css">
-<link rel="stylesheet" href="src/assets/css/template_css/register_called.css">
+<link rel="stylesheet" href="src/assets/css/template_css/call_edit.css">
 
 <?php
 require_once('src/view/template_view/header.php');
@@ -70,7 +70,7 @@ if (isset($_POST['btn-salvar'])) {
 
 <main class="main">
 
-    <div class="content mb-5">
+    <div class="content">
         <div class="content-title">
             <i class="icon icofont-ui-call mr-3 my-5"></i>
             <div>

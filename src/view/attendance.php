@@ -31,7 +31,7 @@ $conexao->close();
 <link rel="stylesheet" href="src/assets/css/template_css/attendance.css">
 
 <main class="main">
-    <div class="content mb-5">
+    <div class="content">
         <div class="content-title">
             <i class="icon icofont-network mr-3 my-5"></i>
             <div>
