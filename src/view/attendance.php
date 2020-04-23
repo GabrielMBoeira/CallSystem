@@ -71,7 +71,7 @@ $conexao->close();
                                         $dataFormat =  date('d/m/Y - H:i:s' , $dataFormatada);
                                         echo $dataFormat;
                                     ?></td>
-                                <td><a href="call_edit.php?id=<?= $registro['id'] ?>" class="btn rounded-circle"><i class="icofont-edit-alt"></i></a></td>
+                                <td><a href="call_edit.php?num_chamado=<?= $registro['num_chamado'] ?>" class="btn rounded-circle"><i class="icofont-edit-alt"></i></a></td>
                             </tr>
                         <?php endforeach ?>
                     </tbody>

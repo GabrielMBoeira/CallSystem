@@ -22,3 +22,5 @@ function getLastChaveAdd1() {
     return $registros['MAX(chave)'] + 1;
 
 }
+
+

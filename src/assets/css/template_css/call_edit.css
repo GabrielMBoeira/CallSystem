@@ -30,6 +30,18 @@ form {
    width: 80%;
 }
 
+.description {
+   border: dashed 1px rgb(207, 205, 211);
+   padding: 15px;
+   margin: 10px 0px;
+   background-color: rgb(227, 233, 231);
+}
+
+.up {
+   font-size: 13px;
+   font-weight: bold;
+}
+
 .btn-save {
    display: flex;
    justify-content: flex-end;

@@ -52,7 +52,8 @@ if (count($_POST) > 0) {
 
         $msg[] = '<div class="alert alert-primary" role="alert">Placa cadastrada com sucesso</div>';
     } else {
-        $msg[] = '<div class="alert alert-danger" role="alert">Erro ao cadastrar: Placa já existe no banco de dados</div>';
+        $msg[] = '<div class="alert alert-danger" role="alert">Erro ao cadastrar: Placa já existe no 
+        banco de dados ou informações estão incorretas</div>';
     }
 }
 ?>
