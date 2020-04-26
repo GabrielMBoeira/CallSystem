@@ -12,7 +12,7 @@ if (isset($_GET['num_chamado'])) {
 
     $num_chamado = $_GET['num_chamado'];
 
-    $sql = "SELECT * FROM chamados WHERE num_chamado = '$num_chamado' AND status = 'ativo';";
+    $sql = "SELECT * FROM chamados WHERE num_chamado = '$num_chamado' AND status = 'ativo'";
     $conexao = novaConexao();
     $resultado = $conexao->query($sql);
 
@@ -39,7 +39,7 @@ if (isset($_POST['btn-salvar'])) {
     $status = $_POST['status'];
     $atuante = $_POST['atuante'];
     $id_placa = $_POST['id_placa'];
-    
+
 
     $sql = "INSERT INTO chamados (chave, num_chamado, nota_fiscal, placa, status, atuante, ocorrencia, id_placa) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
@@ -63,6 +63,7 @@ if (isset($_POST['btn-salvar'])) {
     if ($stmt->execute()) {
         unset($_POST);
     }
+
     $conexao->close();
 }
 
@@ -87,19 +88,20 @@ if (isset($_POST['btn-salvar'])) {
                 <div class="form-row mt-3">
                     <div class="form-group col-md-4">
                         <label for="num_chamado">Chamado</label>
-                        <input type="text" name="num_chamado" id="num_chamado" placeholder="num_chamado" class="form-control" value="<?= $registros['num_chamado'] ?>" disabled>
+                        <input type="text" name="num_chamado" id="num_chamado" placeholder="num_chamado" class="form-control" value="<?= $registros['num_chamado'] ?>" readonly>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="nota_fiscal">Nota fiscal</label>
-                        <input type="text" name="nota_fiscal" id="nota_fiscal" placeholder="Nota fiscal" class="form-control" value="<?= $registros['nota_fiscal'] ?>" disabled>
+                        <input type="text" name="nota_fiscal" id="nota_fiscal" placeholder="Nota fiscal" class="form-control" value="<?= $registros['nota_fiscal'] ?>" readonly>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="placa">Placa</label>
-                        <input type="text" name="placa" id="placa" placeholder="Placa" class="form-control" value="<?= $registros['placa'] ?>" disabled>
+                        <input type="text" name="placa" id="placa" placeholder="Placa" class="form-control" value="<?= $registros['placa'] ?>" readonly>
                     </div>
                 </div>
 
                 <?php
+
                 if (isset($_GET['num_chamado'])) {
 
                     $num_chamado = $_GET['num_chamado'];
