@@ -58,11 +58,13 @@ if (isset($_POST['btn-salvar'])) {
         $id_placa
     ];
 
+
+
     $stmt->bind_param('issssssi', ...$params);
 
     if ($stmt->execute()) {
         unset($_POST);
-    }
+    } 
 
     $conexao->close();
 }
@@ -101,7 +103,6 @@ if (isset($_POST['btn-salvar'])) {
                 </div>
 
                 <?php
-
                 if (isset($_GET['num_chamado'])) {
 
                     $num_chamado = $_GET['num_chamado'];
