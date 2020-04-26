@@ -103,6 +103,7 @@ if (isset($_POST['btn-salvar'])) {
                 </div>
 
                 <?php
+                
                 if (isset($_GET['num_chamado'])) {
 
                     $num_chamado = $_GET['num_chamado'];
