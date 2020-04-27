@@ -58,6 +58,23 @@ if (isset($_POST['btn-salvar'])) {
 
     $stmt->bind_param('issssssi', ...$params);
 
+    $stmt->execute();
+
+    $conexao->close();
+
+    $id = $_POST['id'];
+
+    $sql = "UPDATE chamados SET status = 'inativo' WHERE id = $id;";
+
+    $conexao = novaConexao();
+    $stmt = $conexao->prepare($sql);
+
+    $params = [
+        $id
+    ];
+
+    $stmt->bind_param('i', ...$params);
+
     if ($stmt->execute()) {
         unset($_POST);
     } 
@@ -77,11 +94,12 @@ if (isset($_POST['btn-salvar'])) {
             <i class="icon icofont-ui-call mr-3 my-5"></i>
             <div>
                 <h1>Editar chamado</h1>
+                <?php print_r($_POST['id']) ?>
             </div>
         </div>
         <div class="card">
             <form action="#" method="post">
-                <input type="hidden" name="chave" value="<?= $registros['id']; ?>">
+                <input type="hidden" name="id" value="<?= $registros['id']; ?>">
                 <input type="hidden" name="chave" value="<?= $registros['chave']; ?>">
                 <input type="hidden" name="id_placa" value="<?= $registros['id_placa']; ?>">
                 <div class="form-row mt-3">
