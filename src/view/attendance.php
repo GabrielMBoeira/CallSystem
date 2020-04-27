@@ -4,7 +4,8 @@ require_once('src/view/template_view/aside.php');
 
 require_once('src/db/conexao.php');
 
-$sql = "SELECT c.id, c.num_chamado, c.nota_fiscal, v.placa, v.motorista, v.telefone, c.status, c.atuante, data FROM chamados AS c 
+$sql = "SELECT c.id, c.num_chamado, c.nota_fiscal, v.placa, v.motorista, v.telefone, c.status, c.atuante, data 
+FROM chamados AS c 
 INNER JOIN veiculos AS v
 ON c.id_placa = v.id WHERE c.status = 'ativo';";
 

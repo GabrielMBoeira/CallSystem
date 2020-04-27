@@ -28,7 +28,6 @@ if (isset($_GET['num_chamado'])) {
     $conexao->close();
 }
 
-
 if (isset($_POST['btn-salvar'])) {
 
     $chave = $_POST['chave'];
@@ -39,7 +38,6 @@ if (isset($_POST['btn-salvar'])) {
     $status = $_POST['status'];
     $atuante = $_POST['atuante'];
     $id_placa = $_POST['id_placa'];
-
 
     $sql = "INSERT INTO chamados (chave, num_chamado, nota_fiscal, placa, status, atuante, ocorrencia, id_placa) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
@@ -57,8 +55,6 @@ if (isset($_POST['btn-salvar'])) {
         $ocorrencia,
         $id_placa
     ];
-
-
 
     $stmt->bind_param('issssssi', ...$params);
 
@@ -85,6 +81,7 @@ if (isset($_POST['btn-salvar'])) {
         </div>
         <div class="card">
             <form action="#" method="post">
+                <input type="hidden" name="chave" value="<?= $registros['id']; ?>">
                 <input type="hidden" name="chave" value="<?= $registros['chave']; ?>">
                 <input type="hidden" name="id_placa" value="<?= $registros['id_placa']; ?>">
                 <div class="form-row mt-3">
@@ -108,7 +105,7 @@ if (isset($_POST['btn-salvar'])) {
 
                     $num_chamado = $_GET['num_chamado'];
 
-                    $sql = "SELECT * FROM chamados WHERE num_chamado = $num_chamado AND status = 'ativo';";
+                    $sql = "SELECT * FROM chamados WHERE num_chamado = $num_chamado";
                     $conexao = novaConexao();
                     $resultado = $conexao->query($sql);
 
