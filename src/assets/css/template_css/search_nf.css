@@ -1,0 +1,55 @@
+
+  main {
+   grid-area: main;
+   padding: 10px;
+   background-color: #777;
+}
+
+.content {
+   background-color: #fff;    
+   height: 100%;
+}
+
+.icon {
+   font-size: 2.8rem;
+}
+
+.content-title {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.card {
+   display: flex;
+   align-items: center;
+   height: calc(100% - 200px);
+}
+
+.register {
+   border: solid 1px rgb(180, 181, 182);
+   width: 85%;
+   height: 150px;
+   margin-top: 10px;
+   padding: 20px;
+}
+
+.up {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   font-size: 1.1rem;
+   font-weight: bold;
+}
+ 
+.down {
+   margin-top: 5px;
+   border: dotted 2px;
+   height: 65%;
+   width: 100%;
+   font-weight: bold;
+}
+
+
+
+

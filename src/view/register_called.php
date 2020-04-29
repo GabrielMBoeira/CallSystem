@@ -13,9 +13,10 @@ date_default_timezone_set('America/Sao_Paulo');
 if (count($_POST) > 0) {
     $dados = $_POST;
     $erros = [];
+    $msg = [];
 
-    if (trim($dados['nota-fiscal']) === "") {
-        $erros['nota-fiscal'] = 'Nota fiscal é obrigatória';
+    if (trim($dados['nota_fiscal']) === "") {
+        $erros['nota_fiscal'] = 'Nota fiscal é obrigatória';
     }
 
     if (trim($dados['placa']) === "selecione") {
@@ -50,7 +51,7 @@ if (count($_POST) > 0) {
         $params = [
             $dados['chave'], 
             $num_chamado,
-            $dados['nota-fiscal'],
+            $dados['nota_fiscal'],
             $optionsPlacas[1],  
             $dados['status'],
             $dados['atuante'],
@@ -61,7 +62,11 @@ if (count($_POST) > 0) {
         $stmt->bind_param("issssssi", ...$params);
 
         if ($stmt->execute()) {
+            $msg[] = '<div class="alert alert-primary" role="alert">Chamado cadastrado com sucesso!</div>';
             unset($dados); //Depois de inserir limpar os dados
+            unset($_POST); //Depois de inserir limpar os dados
+        } else {
+            $msg[] = '<div class="alert alert-danger" role="alert">Erro ao cadastrar chamado!</div>';
         }
         $conexao->close();
     }
@@ -83,17 +88,18 @@ if (count($_POST) > 0) {
             <form action="#" method="post">
                 <input type="hidden" name="data" value="<?= date('Ymd'); ?>">
                 <input type="hidden" name="chave" value="<?= getLastChaveAdd1() ?>">
+                <?= $msg[0] ?>
                 <div class="form-row mt-3">
                     <div class="form-group col-md-6">
-                        <label for="nota-fiscal">Nota fiscal</label>
-                        <input type="text" name="nota-fiscal" id="nota-fiscal" placeholder="Nota fiscal" class="form-control <?= $erros['nota-fiscal'] ? 'is-invalid' : '' ?>">
+                        <label for="nota_fiscal">Nota fiscal</label>
+                        <input type="text" name="nota_fiscal" id="nota_fiscal" placeholder="Nota fiscal" class="form-control <?= $erros['nota_fiscal'] ? 'is-invalid' : '' ?>" value="<?= $dados['nota_fiscal'] ?>">
                         <div class="invalid-feedback">
-                            <?= $erros['nota-fiscal'] ?>
+                            <?= $erros['nota_fiscal'] ?>
                         </div>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="placa">Placa</label>
-                        <select class="form-control <?= $erros['placa'] ? 'is-invalid' : '' ?>" name="placa">
+                        <select class="form-control <?= $erros['placa'] ? 'is-invalid' : '' ?>" name="placa" >
                             <option value="selecione">Selecione a placa</option>
 
                             <?php
@@ -122,7 +128,7 @@ if (count($_POST) > 0) {
                 <div class="form-row mt-3">
                     <div class="form-group col-md-6">
                         <label for="status">Status</label>
-                        <select class="form-control <?= $erros['status'] ? 'is-invalid' : '' ?>" name="status" id="status">
+                        <select class="form-control <?= $erros['status'] ? 'is-invalid' : '' ?>" name="status" id="status" >
                             <option value="selecione" selected>Selecione o status</option>
                             <option value="ativo">Ativo</option>
                         </select>
@@ -132,7 +138,7 @@ if (count($_POST) > 0) {
                     </div>
                     <div class="form-group col-md-6">
                         <label for="atuante">Atuante</label>
-                        <select class="form-control <?= $erros['atuante'] ? 'is-invalid' : '' ?>" name="atuante" id="atuante">
+                        <select class="form-control <?= $erros['atuante'] ? 'is-invalid' : '' ?>" name="atuante" id="atuante" >
                             <option value="selecione" selected>Selecione o atuante</option>
                             <option value="setor1">Setor 1</option>
                             <option value="setor2">Setor 2</option>
@@ -145,7 +151,7 @@ if (count($_POST) > 0) {
                 </div>
                 <div class="form-group">
                     <label for="ocorrencia">Ocorrência</label>
-                    <textarea class="form-control <?= $erros['ocorrencia'] ? 'is-invalid' : '' ?>" name="ocorrencia" id="ocorrencia" rows="3"></textarea>
+                    <textarea class="form-control <?= $erros['ocorrencia'] ? 'is-invalid' : '' ?>" name="ocorrencia" id="ocorrencia" rows="3" ></textarea>
                     <div class="invalid-feedback">
                         <?= $erros['ocorrencia'] ?>
                     </div>
