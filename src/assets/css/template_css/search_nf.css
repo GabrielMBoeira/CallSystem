@@ -32,6 +32,7 @@
    height: 150px;
    margin-top: 10px;
    padding: 20px;
+   background: rgba(212,228,239,1);
 }
 
 .up {
@@ -44,11 +45,13 @@
  
 .down {
    margin-top: 5px;
-   border: dotted 2px;
+   border: solid 3px rgb(246, 248, 248);
    height: 65%;
    width: 100%;
    font-weight: bold;
+   overflow: auto;
 }
+
 
 
 

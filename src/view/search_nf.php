@@ -39,12 +39,12 @@ if (count($_POST) > 0) {
                     <div class="up-content">
                         Placa: QHG3907
                     </div>
-                    <a class="btn btn-outline-primary my-2" type="submit" href=""><i class="icofont-ui-edit"></i></a>
+                    <a class="btn btn-outline-secondary my-2" type="submit" href=""><i class="icofont-ui-edit"></i></a>
                 </div>
                 <div class="down">
                     <div class="down-content">
-                        Ocorrência: Testando ocorrencia
-                    </div>
+                        Ocorrência: Testando ocorrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkdddddddddddddorrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkddddddddddddd
+                        orrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkddddddddddddd orrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkddddddddddddd orrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkddddddddddddd orrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkddddddddddddd orrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkddddddddddddd orrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkddddddddddddd orrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkddddddddddddd orrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkddddddddddddd orrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkddddddddddddd            </div>
                 </div>
             </div>
         </div>
