@@ -9,10 +9,21 @@ require_once "src/db/conexao.php";
 
 date_default_timezone_set('America/Sao_Paulo');
 
-if (count($_POST) > 0) {
-    $dados = $_POST;
-    $erros = [];
-    $msg = [];
+if(isset($_POST['search'])) {
+ 
+    $dados = $_POST['search'];
+
+    $conexao = novaConexao();
+    $sql = "SELECT * FROM chamados WHERE nota_fiscal = '$dados' AND status = 'aberto' OR status = 'fechado';";
+    $resultado = $conexao->query($sql);
+    
+    $registros= [];
+
+    if ($resultado->num_rows > 0) {
+        while ($row = $resultado->fetch_array()) {
+            $registros[] = $row;
+        }
+    }
 }
 ?>
 
@@ -28,26 +39,30 @@ if (count($_POST) > 0) {
             </div>
         </div>
         <div class="card">
-            <div class="register">
+            <?php foreach ($registros as $registro): ?>
+            <div class="register my-2">
                 <div class="up">
                     <div class="up-content">
-                        Número do chamado: 9999999999999
+                        Número do chamado: <?= $registro['num_chamado']; ?>
                     </div>
                     <div class="up-content">
-                        Nota fiscal: 123456
+                        Nota fiscal: <?= $registro['nota_fiscal']; ?>
                     </div>
                     <div class="up-content">
-                        Placa: QHG3907
+                        Placa: <?= $registro['placa']; ?>
                     </div>
-                    <a class="btn btn-outline-secondary my-2" type="submit" href=""><i class="icofont-ui-edit"></i></a>
+                    <div class="up-content">
+                        Status: <?= $registro['status']; ?>
+                    </div>
+                    <a class="btn btn-outline-secondary my-2" type="submit" href="call_edit.php?num_chamado=<?= $registro['num_chamado'] ?>"><i class="icofont-ui-edit"></i></a>
                 </div>
                 <div class="down">
                     <div class="down-content">
-                        Ocorrência: Testando ocorrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkdddddddddddddorrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkddddddddddddd
-                        orrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkddddddddddddd orrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkddddddddddddd orrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkddddddddddddd orrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkddddddddddddd orrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkddddddddddddd orrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkddddddddddddd orrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkddddddddddddd orrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkddddddddddddd orrenciajçaslfjlçasjçflkajsçflkajsçdlfkjasdfkçaslkfjçaslkfdjçlaskjfçlaksjfdçlkasjdfçlkddddddddddddd            </div>
+                        Ocorrência: <?= $registro['ocorrencia']; ?>
                 </div>
             </div>
         </div>
+        <?php endforeach ?>
     </div>
 </main>
 

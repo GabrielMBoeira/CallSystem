@@ -130,7 +130,7 @@ if (count($_POST) > 0) {
                         <label for="status">Status</label>
                         <select class="form-control <?= $erros['status'] ? 'is-invalid' : '' ?>" name="status" id="status" >
                             <option value="selecione" selected>Selecione o status</option>
-                            <option value="ativo">Ativo</option>
+                            <option value="aberto">Aberto</option>
                         </select>
                         <div class="invalid-feedback">
                             <?= $erros['status'] ?>

@@ -7,7 +7,7 @@ require_once('src/db/conexao.php');
 $sql = "SELECT c.id, c.num_chamado, c.nota_fiscal, v.placa, v.motorista, v.telefone, c.status, c.atuante, data 
 FROM chamados AS c 
 INNER JOIN veiculos AS v
-ON c.id_placa = v.id WHERE c.status = 'ativo';";
+ON c.id_placa = v.id WHERE c.status = 'aberto';";
 
 $conexao = novaConexao();
 $stmt = $conexao->prepare($sql);

@@ -12,7 +12,7 @@ if (isset($_GET['num_chamado'])) {
 
     $num_chamado = $_GET['num_chamado'];
 
-    $sql = "SELECT * FROM chamados WHERE num_chamado = '$num_chamado' AND status = 'ativo'";
+    $sql = "SELECT * FROM chamados WHERE num_chamado = '$num_chamado' AND status = 'aberto' OR status = 'fechado'";
     $conexao = novaConexao();
     $resultado = $conexao->query($sql);
 
@@ -158,8 +158,8 @@ if (isset($_POST['btn-salvar'])) {
                         <label for="status">Status</label>
                         <select class="form-control" name="status" id="status">
                             <option value="selecione" selected>Selecione o status</option>
-                            <option value="ativo">Ativo</option>
-                            <option value="inativo">Inativo</option>
+                            <option value="aberto">Aberto</option>
+                            <option value="fechado">Fechado</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">
