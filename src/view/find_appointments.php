@@ -6,12 +6,8 @@ require_once('src/db/conexao.php');
 if (isset($_POST)) {
 
     $dados = $_POST;
-
     
-
 }
-
-
 
 ?>
 
@@ -44,7 +40,7 @@ if (isset($_POST)) {
                     </div>
                     <div class="form-group col-md-6">
                         <label for="chamado">Chamado</label>
-                        <input type="text" class="form-control" name="chamado" placeholder="Núm. chamado" id="chamado">
+                        <input type="text" class="form-control" name="num_chamado" placeholder="Núm. chamado" id="chamado">
                     </div>
                 </div>
                 <div class="form-row mt-3">

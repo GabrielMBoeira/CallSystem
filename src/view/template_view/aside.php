@@ -1,7 +1,7 @@
 
 <aside class="aside">
-    <form action="search.php" class="form-inline mt-4" method="post">
-        <input class="form-control mr-sm-2" type="search" name="search" placeholder="Pesquisar NF-e" aria-label="Search">
+    <form action="search_nf.php" class="form-inline mt-4" method="post">
+        <input class="form-control mr-sm-2" type="search" name="search_nf" placeholder="Pesquisar NF-e" aria-label="search_nf">
         <button class="btn btn-outline-primary my-2" type="submit"><i class="icofont-search-1"></i></button>
     </form>
     <a class="btn btn-aside mt-4" href="attendance.php">
