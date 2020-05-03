@@ -9,15 +9,6 @@ require_once('src/view/template_view/aside.php');
 <script src="src/assets/js/jquery.3.5.0.min.js"></script>
 <script src="src/assets/js/jquery.mask.min.js"></script>
 
-<?php
-
-    if (isset($_POST['general-search'])) {
-        $dados = $_POST['num_chamado'];
-    } 
-
-?>
-
-
 <main class="main">
     <div class="content mb-5">
         <div class="content-title">

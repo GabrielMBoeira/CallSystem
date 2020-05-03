@@ -13,14 +13,12 @@ date_default_timezone_set('America/Sao_Paulo');
 
 if (isset($_POST['general-search'])) {
 
-    $data_inicial = $_POST['data_inicial'];
-    $data_final = $_POST['data_final'];
     $num_chamado = $_POST['num_chamado'];
     $nota_fiscal = $_POST['nota_fiscal'];
     $placa = $_POST['placa'];
     $atuante = $_POST['atuante'];
 
-
+    $registros = [];
 
     if ($num_chamado || $nota_fiscal || $placa || $atuante) {
 
@@ -34,8 +32,6 @@ if (isset($_POST['general-search'])) {
 
         $resultado = $conexao->query($sql);
 
-        $registros = [];
-
         if ($resultado->num_rows > 0) {
             while ($row = $resultado->fetch_array()) {
                 $registros[] = $row;
@@ -43,27 +39,28 @@ if (isset($_POST['general-search'])) {
         }
         $conexao->close();
     }
+
+    $data_inicial = $_POST['data_inicial'] . ' 00:00:00';
+    $data_final = $_POST['data_final'] . ' 00:00:00';
+
+    if (($data_inicial && $data_final) != '') {
+
+        $conexao = novaConexao();
+        $sql = "SELECT * FROM chamados WHERE data BETWEEN '$data_inicial' AND '$data_final' AND (status = 'aberto' OR status = 'fechado');";
+
+        $resultado = $conexao->query($sql);
+
+        if ($resultado->num_rows > 0) {
+            while ($row = $resultado->fetch_array()) {
+                $registros[] = $row;
+            }
+        }
+        $conexao->close();
+    } 
 }
 
 
-// if ($data_inicial && $data_final) {
-
-//     $conexao = novaConexao();
-//     $sql = "";
-
-//     $resultado = $conexao->query($sql);
-
-//     $registros = [];
-
-//     if ($resultado->num_rows > 0) {
-//         while ($row = $resultado->fetch_array()) {
-//             $registros[] = $row;
-//         }
-//     }
-//     $conexao->close();
-// }
-
-//Dados vindos do formulário 'Pesquisar NF-e' = aside.
+//Dados vindos do formulário 'Pesquisar NF-e' = aside.php
 if (isset($_POST['search_nf'])) {
 
     $search_nf = $_POST['search_nf'];
@@ -76,7 +73,7 @@ if (isset($_POST['search_nf'])) {
 
     if ($resultado->num_rows > 0) {
         while ($row = $resultado->fetch_array()) {
-            $registros = $row;
+            $registros[] = $row;
         }
     }
     $conexao->close();
