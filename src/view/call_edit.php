@@ -12,7 +12,7 @@ if (isset($_GET['num_chamado'])) {
 
     $num_chamado = $_GET['num_chamado'];
 
-    $sql = "SELECT * FROM chamados WHERE num_chamado = '$num_chamado' AND status = 'aberto'";
+    $sql = "SELECT * FROM chamados WHERE num_chamado = '$num_chamado' AND (status = 'aberto' OR status = 'fechado');";
     $conexao = novaConexao();
     $resultado = $conexao->query($sql);
 
@@ -156,7 +156,7 @@ if (isset($_POST['btn-salvar'])) {
                 ?>
                 <div class="form-group">
                     <label for="ocorrencia">Ocorrência</label>
-                    <textarea class="form-control <?= $erros['ocorrencia'] ? 'is-invalid' : '' ?>" name="ocorrencia" id="ocorrencia" rows="3" autofocus><?= $ocorrencia ?></textarea>
+                    <textarea class="form-control <?= $erros['ocorrencia'] ? 'is-invalid' : '' ?>" name="ocorrencia" id="ocorrencia" rows="3" autofocus><?= $erro ? $ocorrencia : '' ?></textarea>
                     <div class="invalid-feedback">
                         <?= $erros['ocorrencia'] ?>
                     </div>

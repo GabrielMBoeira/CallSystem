@@ -1,14 +1,6 @@
 <?php
 require_once('src/view/template_view/header.php');
 require_once('src/view/template_view/aside.php');
-require_once('src/db/conexao.php');
-
-if (isset($_POST)) {
-
-    $dados = $_POST;
-    
-}
-
 ?>
 
 <link rel="stylesheet" href="src/assets/css/template_css/template.css">
@@ -17,6 +9,14 @@ if (isset($_POST)) {
 <script src="src/assets/js/jquery.3.5.0.min.js"></script>
 <script src="src/assets/js/jquery.mask.min.js"></script>
 
+<?php
+
+    if (isset($_POST['general-search'])) {
+        $dados = $_POST['num_chamado'];
+    } 
+
+?>
+
 
 <main class="main">
     <div class="content mb-5">
@@ -24,18 +24,17 @@ if (isset($_POST)) {
             <i class="icon icofont-search-folder mr-3 my-5"></i>
             <div>
                 <h1>Pesquisar chamados</h1>
-                <?php print_r($dados) ?>
             </div>
         </div>
         <div class="card">
             <form action="search_nf.php" method="post">
                 <div class="form-row mt-3">
                     <div class="form-group col-md-3">
-                        <label for="data-inicial">Data inicial</label>
+                        <label for="data_inicial">Data inicial</label>
                         <input type="date" class="form-control" name="data_inicial" id="data_inicial">
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="data-final">Data final</label>
+                        <label for="data_final">Data final</label>
                         <input type="date" class="form-control" name="data_final" id="data_final">
                     </div>
                     <div class="form-group col-md-6">
@@ -46,7 +45,7 @@ if (isset($_POST)) {
                 <div class="form-row mt-3">
                     <div class="form-group col-md-4">
                         <label for="nota-fiscal">Nota fiscal</label>
-                        <input type="text"class="form-control" name="nota_fiscal" placeholder="Nota fiscal" id="nota-fiscal">
+                        <input type="text" class="form-control" name="nota_fiscal" placeholder="Nota fiscal" id="nota-fiscal">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="placa">Placa</label>
@@ -63,7 +62,7 @@ if (isset($_POST)) {
                     </div>
                 </div>
                 <div class="form-row btn-save  mt-3">
-                    <button class="btn btn-lg btn-primary mt-3">
+                    <button class="btn btn-lg btn-primary mt-3" type="submit" name="general-search">
                         Pesquisar
                     </button>
                 </div>
@@ -73,13 +72,10 @@ if (isset($_POST)) {
 </main>
 
 <script type="text/javascript">
-    
     //Transformanto input placa em uppercase
     $("#placa").change(function() {
         $(this).val($(this).val().toUpperCase());
     });
-
-    
 </script>
 
 <?php
