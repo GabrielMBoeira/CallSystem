@@ -17,7 +17,7 @@ if(isset($_POST['nota_fiscal'])) $nota_fiscal = $_POST['nota_fiscal'];
 if(isset($_POST['placa'])) $placa = $_POST['placa'];
 if(isset($_POST['atuante'])) $atuante = $_POST['atuante'];
 
-if ($data_inicial || $data_final || $num_chamado || $nota_fiscal || $placa || $atuante) {
+if ($num_chamado || $nota_fiscal || $placa || $atuante) {
 
     $conexao = novaConexao();
     $sql = "SELECT * FROM chamados 
@@ -25,7 +25,7 @@ if ($data_inicial || $data_final || $num_chamado || $nota_fiscal || $placa || $a
     OR num_chamado = '$num_chamado' 
     OR placa = '$placa' 
     OR atuante = '$atuante')
-    AND status = 'inativo' OR status = 'ativo';";
+    AND status = 'fechado';";
     $resultado = $conexao->query($sql);
     
     $registros= [];
@@ -36,6 +36,8 @@ if ($data_inicial || $data_final || $num_chamado || $nota_fiscal || $placa || $a
         }
     }
     $conexao->close();
+} else {
+    echo 'Erro: Algum campo não foi setado';
 }
 
 //Dados vindos do formulário 'Pesquisar NF-e' = aside.

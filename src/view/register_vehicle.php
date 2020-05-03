@@ -52,8 +52,7 @@ if (count($_POST) > 0) {
 
         $msg[] = '<div class="alert alert-primary" role="alert">Placa cadastrada com sucesso</div>';
     } else {
-        $msg[] = '<div class="alert alert-danger" role="alert">Erro ao cadastrar: Placa já existe no 
-        banco de dados ou informações estão incorretas</div>';
+        $msg[] = '<div class="alert alert-danger" role="alert">Erro ao cadastrar: Dados incorretos ou placa já está cadastrada!</div>';
     }
 }
 ?>
@@ -73,21 +72,21 @@ if (count($_POST) > 0) {
                 <div class="form-row mt-3">
                     <div class="form-group col-md-4">
                         <label for="placa">Placa</label>
-                        <input type="text" name="placa" id="placa" class="form-control <?= $erros['placa'] ? 'is-invalid' : '' ?>" style="text-transform: uppercase">
+                        <input type="text" name="placa" id="placa" class="form-control <?= $erros['placa'] ? 'is-invalid' : '' ?>" style="text-transform: uppercase" value="<?= $dados['placa'] ?>" >
                         <div class="invalid-feedback">
                             <?= $erros['placa'] ?>
                         </div>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="motorista">Motorista</label>
-                        <input type="text" name="motorista" id="motorista" class="form-control <?= $erros['motorista'] ? 'is-invalid' : '' ?>" style="text-transform: uppercase">
+                        <input type="text" name="motorista" id="motorista" class="form-control <?= $erros['motorista'] ? 'is-invalid' : '' ?>" style="text-transform: uppercase" value="<?= $dados['motorista'] ?>">
                         <div class="invalid-feedback">
                             <?= $erros['motorista'] ?>
                         </div>
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-4">   
                         <label for="telefone">Fone (Celular)</label>
-                        <input type="text" name="telefone" id="telefone" class="form-control <?= $erros['telefone'] ? 'is-invalid' : '' ?> ">
+                        <input type="text" name="telefone" id="telefone" class="form-control <?= $erros['telefone'] ? 'is-invalid' : '' ?>" value="<?= $dados['telefone'] ?>">
                         <div class="invalid-feedback">
                             <?= $erros['telefone'] ?>
                         </div>

@@ -12,7 +12,7 @@ if (isset($_GET['num_chamado'])) {
 
     $num_chamado = $_GET['num_chamado'];
 
-    $sql = "SELECT * FROM chamados WHERE num_chamado = '$num_chamado' AND status = 'aberto' OR status = 'fechado'";
+    $sql = "SELECT * FROM chamados WHERE num_chamado = '$num_chamado' AND status = 'aberto'";
     $conexao = novaConexao();
     $resultado = $conexao->query($sql);
 
@@ -39,47 +39,55 @@ if (isset($_POST['btn-salvar'])) {
     $atuante = $_POST['atuante'];
     $id_placa = $_POST['id_placa'];
 
-    $sql = "INSERT INTO chamados (chave, num_chamado, nota_fiscal, placa, status, atuante, ocorrencia, id_placa) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+    $erro = [];
 
-    $conexao = novaConexao();
-    $stmt = $conexao->prepare($sql);
+    if (trim($ocorrencia) === '') $erro[] = '<div class="alert alert-danger" role="alert">Ocorrência é obrigatória!</div>';
+    if (trim($status) === '') $erro[] = '<div class="alert alert-danger" role="alert">Status é obrigatório!</div>';
+    if (trim($atuante) === '') $erro[] = '<div class="alert alert-danger" role="alert">Atuante é obrigatório!</div>';
 
-    $params = [
-        $chave,
-        $num_chamado,
-        $nota_fiscal,
-        $placa,
-        $status,
-        $atuante,
-        $ocorrencia,
-        $id_placa
-    ];
+    if (!$erro) {
+        $sql = "INSERT INTO chamados (chave, num_chamado, nota_fiscal, placa, status, atuante, ocorrencia, id_placa) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
-    $stmt->bind_param('issssssi', ...$params);
+        $conexao = novaConexao();
+        $stmt = $conexao->prepare($sql);
 
-    $stmt->execute();
+        $params = [
+            $chave,
+            $num_chamado,
+            $nota_fiscal,
+            $placa,
+            $status,
+            $atuante,
+            $ocorrencia,
+            $id_placa
+        ];
 
-    $conexao->close();
+        $stmt->bind_param('issssssi', ...$params);
 
-    $id = $_POST['id'];
+        $stmt->execute();
 
-    $sql = "UPDATE chamados SET status = 'inativo' WHERE id = $id;";
+        $conexao->close();
 
-    $conexao = novaConexao();
-    $stmt = $conexao->prepare($sql);
+        $id = $_POST['id'];
 
-    $params = [
-        $id
-    ];
+        $sql = "UPDATE chamados SET status = 'inativo' WHERE id = $id;";
 
-    $stmt->bind_param('i', ...$params);
+        $conexao = novaConexao();
+        $stmt = $conexao->prepare($sql);
 
-    if ($stmt->execute()) {
-        unset($_POST);
+        $params = [
+            $id
+        ];
+
+        $stmt->bind_param('i', ...$params);
+
+        if ($stmt->execute()) {
+            unset($_POST);
+        }
+
+        $conexao->close();
     } 
-
-    $conexao->close();
 }
 
 ?>
@@ -94,11 +102,11 @@ if (isset($_POST['btn-salvar'])) {
             <i class="icon icofont-ui-call mr-3 my-5"></i>
             <div>
                 <h1>Editar chamado</h1>
-                <?php print_r($_POST['id']) ?>
             </div>
         </div>
         <div class="card">
             <form action="#" method="post">
+                <?= $erro[0] ?>
                 <input type="hidden" name="id" value="<?= $registros['id']; ?>">
                 <input type="hidden" name="chave" value="<?= $registros['chave']; ?>">
                 <input type="hidden" name="id_placa" value="<?= $registros['id_placa']; ?>">
@@ -118,7 +126,7 @@ if (isset($_POST['btn-salvar'])) {
                 </div>
 
                 <?php
-                
+
                 if (isset($_GET['num_chamado'])) {
 
                     $num_chamado = $_GET['num_chamado'];
@@ -131,13 +139,13 @@ if (isset($_POST['btn-salvar'])) {
                         while ($row = $resultado->fetch_array()) {
                             $atuante = $row['atuante'];
                             $data = $row['data'];
-                            $ocorrencia = $row['ocorrencia'];
+                            $ocorrencias = $row['ocorrencia'];
                             $dataFormatada = strtotime($data);
                             $dataFormat =  date('d/m/Y - H:i:s', $dataFormatada);
 
                             echo "<div class='description'>
                                     <span class='up'>$atuante - $dataFormat</span>
-                                    <div class='text'>$ocorrencia</div>
+                                    <div class='text'>$ocorrencias</div>
                                   </div>";
                         }
                     } elseif ($conexao->error) {
@@ -148,7 +156,7 @@ if (isset($_POST['btn-salvar'])) {
                 ?>
                 <div class="form-group">
                     <label for="ocorrencia">Ocorrência</label>
-                    <textarea class="form-control <?= $erros['ocorrencia'] ? 'is-invalid' : '' ?>" name="ocorrencia" id="ocorrencia" rows="3" value="<?= $registros['ocorrencia'] ?>" autofocus></textarea>
+                    <textarea class="form-control <?= $erros['ocorrencia'] ? 'is-invalid' : '' ?>" name="ocorrencia" id="ocorrencia" rows="3" autofocus><?= $ocorrencia ?></textarea>
                     <div class="invalid-feedback">
                         <?= $erros['ocorrencia'] ?>
                     </div>
@@ -157,7 +165,7 @@ if (isset($_POST['btn-salvar'])) {
                     <div class="form-group col-md-6">
                         <label for="status">Status</label>
                         <select class="form-control" name="status" id="status">
-                            <option value="selecione" selected>Selecione o status</option>
+                            <option value="" selected>Selecione o status</option>
                             <option value="aberto">Aberto</option>
                             <option value="fechado">Fechado</option>
                         </select>
@@ -165,7 +173,7 @@ if (isset($_POST['btn-salvar'])) {
                     <div class="form-group col-md-6">
                         <label for="atuante">Atuante</label>
                         <select class="form-control" name="atuante" id="atuante">
-                            <option value="selecione" selected>Selecione o atuante</option>
+                            <option value="" selected>Selecione o atuante</option>
                             <option value="setor1">Setor 1</option>
                             <option value="setor2">Setor 2</option>
                             <option value="setor3">Setor 3</option>

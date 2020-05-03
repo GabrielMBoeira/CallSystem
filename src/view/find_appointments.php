@@ -28,7 +28,7 @@ if (isset($_POST)) {
             </div>
         </div>
         <div class="card">
-            <form action="#" method="post">
+            <form action="search_nf.php" method="post">
                 <div class="form-row mt-3">
                     <div class="form-group col-md-3">
                         <label for="data-inicial">Data inicial</label>
@@ -39,7 +39,7 @@ if (isset($_POST)) {
                         <input type="date" class="form-control" name="data_final" id="data_final">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="chamado">Chamado</label>
+                        <label for="num_chamado">Chamado</label>
                         <input type="text" class="form-control" name="num_chamado" placeholder="Núm. chamado" id="chamado">
                     </div>
                 </div>
@@ -55,7 +55,7 @@ if (isset($_POST)) {
                     <div class="form-group col-md-4">
                         <label for="atuante">Atuante</label>
                         <select class="form-control" name="atuante" id="atuante">
-                            <option value="selecione">Selecione</option>
+                            <option value="">Selecione</option>
                             <option value="setor1">Setor 1</option>
                             <option value="setor2">Setor 2</option>
                             <option value="setor3">Setor 3</option>
