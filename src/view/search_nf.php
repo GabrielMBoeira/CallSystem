@@ -10,7 +10,6 @@ require_once "src/db/conexao.php";
 date_default_timezone_set('America/Sao_Paulo');
 
 //Dados vindos do formulário 'find_appointments.php'
-
 if (isset($_POST['general-search'])) {
 
     $num_chamado = $_POST['num_chamado'];
@@ -19,6 +18,18 @@ if (isset($_POST['general-search'])) {
     $atuante = $_POST['atuante'];
 
     $registros = [];
+
+
+    if (
+        $_POST['data_inicial'] === '' &&
+        $_POST['data_final'] === '' &&
+        $_POST['num_chamado'] === '' &&
+        $_POST['nota_fiscal'] === '' &&
+        $_POST['placa'] === '' &&
+        $_POST['atuante'] === ''
+    ) {
+        header('Location: find_appointments.php');
+    }
 
     if ($num_chamado || $nota_fiscal || $placa || $atuante) {
 
@@ -56,7 +67,7 @@ if (isset($_POST['general-search'])) {
             }
         }
         $conexao->close();
-    } 
+    }
 }
 
 

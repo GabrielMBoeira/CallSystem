@@ -9,6 +9,26 @@ require_once('src/view/template_view/aside.php');
 <script src="src/assets/js/jquery.3.5.0.min.js"></script>
 <script src="src/assets/js/jquery.mask.min.js"></script>
 
+<?php
+
+// if (isset($_POST['general-search'])) {
+
+//     $msg = [];
+
+//     if (
+//         $_POST['data_inicial'] === '' &&
+//         $_POST['data_final'] === '' &&
+//         $_POST['num_chamado'] === '' &&
+//         $_POST['nota_fiscal'] === '' &&
+//         $_POST['placa'] === '' &&
+//         $_POST['atuante'] === ''
+//     ) {
+//         $msg[] = '<div class="alert alert-danger" role="alert">Selecione um campo!</div>';
+//     } 
+// }
+
+?>
+
 <main class="main">
     <div class="content mb-5">
         <div class="content-title">
@@ -19,6 +39,7 @@ require_once('src/view/template_view/aside.php');
         </div>
         <div class="card">
             <form action="search_nf.php" method="post">
+                <?php print_r($msg[0]); ?>
                 <div class="form-row mt-3">
                     <div class="form-group col-md-3">
                         <label for="data_inicial">Data inicial</label>
