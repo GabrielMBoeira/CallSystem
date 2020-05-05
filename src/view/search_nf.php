@@ -9,6 +9,8 @@ require_once "src/db/conexao.php";
 
 date_default_timezone_set('America/Sao_Paulo');
 
+session_start();
+
 //Dados vindos do formulário 'find_appointments.php'
 if (isset($_POST['general-search'])) {
 
@@ -28,7 +30,9 @@ if (isset($_POST['general-search'])) {
         $_POST['placa'] === '' &&
         $_POST['atuante'] === ''
     ) {
+        $_SESSION['mensagem'] = 'Favor preencher algum campo';
         header('Location: find_appointments.php');
+        
     }
 
     if ($num_chamado || $nota_fiscal || $placa || $atuante) {
@@ -100,7 +104,6 @@ if (isset($_POST['search_nf'])) {
             <i class="icon icofont-database mr-3 my-5"></i>
             <div>
                 <h1>Registros</h1>
-                <?php print_r($_POST) ?>
             </div>
         </div>
         <div class="card">

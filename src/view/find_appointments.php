@@ -10,27 +10,16 @@ require_once('src/view/template_view/aside.php');
 <script src="src/assets/js/jquery.mask.min.js"></script>
 
 <?php
+session_start();
 
-// if (isset($_POST['general-search'])) {
-
-//     $msg = [];
-
-//     if (
-//         $_POST['data_inicial'] === '' &&
-//         $_POST['data_final'] === '' &&
-//         $_POST['num_chamado'] === '' &&
-//         $_POST['nota_fiscal'] === '' &&
-//         $_POST['placa'] === '' &&
-//         $_POST['atuante'] === ''
-//     ) {
-//         $msg[] = '<div class="alert alert-danger" role="alert">Selecione um campo!</div>';
-//     } 
-// }
-
+if (isset($_SESSION['mensagem'])) {
+    $msg = '<div class="alert alert-danger" role="alert">Campos não foram preenchidos!</div>';
+}
+session_unset();
 ?>
 
 <main class="main">
-    <div class="content mb-5">
+    <div class="content">
         <div class="content-title">
             <i class="icon icofont-search-folder mr-3 my-5"></i>
             <div>
@@ -39,7 +28,7 @@ require_once('src/view/template_view/aside.php');
         </div>
         <div class="card">
             <form action="search_nf.php" method="post">
-                <?php print_r($msg[0]); ?>
+                <?php echo $msg; ?>
                 <div class="form-row mt-3">
                     <div class="form-group col-md-3">
                         <label for="data_inicial">Data inicial</label>
