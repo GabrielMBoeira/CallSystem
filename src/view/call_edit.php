@@ -1,6 +1,9 @@
 <link rel="stylesheet" href="src/assets/css/template_css/template.css">
 <link rel="stylesheet" href="src/assets/css/template_css/call_edit.css">
 
+<script src="src/assets/js/jquery.3.5.0.min.js"></script>
+<script src="src/assets/js/jquery.mask.min.js"></script>
+
 <?php
 require_once('src/view/template_view/header.php');
 require_once('src/view/template_view/aside.php');
@@ -91,9 +94,6 @@ if (isset($_POST['btn-salvar'])) {
 }
 
 ?>
-
-<script src="src/assets/js/jquery.3.5.0.min.js"></script>
-<script src="src/assets/js/jquery.mask.min.js"></script>
 
 <main class="main">
 
