@@ -1,3 +1,44 @@
+<?php
+
+require_once('src/db/conexao.php');
+
+if (isset($_POST['register'])) {
+
+    $msg = [];
+
+    $nome = htmlspecialchars(trim($_POST['name']));
+    $email = htmlspecialchars(trim($_POST['email']));
+    $password = htmlspecialchars(trim($_POST['password']));
+    $confirm_password = htmlspecialchars(trim($_POST['confirm_password']));
+
+    if ($password === $confirm_password) {
+
+        $sql = "INSERT INTO login (nome, email, senha) VALUES (?, ?, ?);";
+
+        $conexao = novaConexao();
+        $stmt = $conexao->prepare($sql);
+
+        $params = [
+            $nome,
+            $email,
+            $password,
+        ];
+
+        $stmt->bind_param('sss', ...$params);
+
+        if ($stmt->execute()) {
+            unset($_POST['register']);
+            $msg[] = '<div class="alert alert-primary my-1" role="alert">Usuário cadastrado com sucesso!</div>';
+        } else {
+            $msg[] = '<div class="alert alert-danger my-1" role="alert">Erro usuário não cadastrado!</div>';
+        }
+    } else {
+        $msg[] = '<div class="alert alert-danger my-1" role="alert">Senhas não conferem!</div>';
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -12,20 +53,23 @@
 </head>
 
 <body>
-    <form action="attendance.php" method="post">
+    <form action="#" method="post">
         <div class="login-card card">
             <div class="card-header d-flex justify-content-flexstart">
                 <img src="src/assets/images/phone.png" alt="phone" width="auto" height="32">
                 Cadastrar usuário
             </div>
             <div class="card-body">
+                <?= $msg[0]; ?>
                 <div class="form-group">
                     <label for="name">Nome</label>
-                    <input type="text" id="name" name="name" placeholder="Digite o seu nome" class="form-control" required>
+                    <input type="text" id="name" name="name" placeholder="Digite o seu nome" class="form-control" 
+                    value="<?= $_POST['name']?>" required>
                 </div>
                 <div class="form-group">
                     <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email" placeholder="Digite o seu e-mail" class="form-control" required>
+                    <input type="email" id="email" name="email" placeholder="Digite o seu e-mail" class="form-control" 
+                    value="<?= $_POST['email']?>" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Senha</label>
@@ -36,9 +80,11 @@
                     <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirme sua senha" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <div class="area-logo">
-                        <button class=" btn btn-primary help">Cadastrar</button>
+                    <div class="btn-cadastrar">
+                        <button class=" btn btn-primary help" name="register">Cadastrar</button>
+                        <a class=" btn btn-primary help" name="register">Voltar a página de login</a>
                     </div>
+                    
                 </div>
             </div>
         </div>
