@@ -1,6 +1,7 @@
 <?php
 
 require_once('src/db/conexao.php');
+require_once('src/db/validation.php');
 
 if (isset($_POST['register'])) {
 
@@ -11,30 +12,39 @@ if (isset($_POST['register'])) {
     $password = htmlspecialchars(trim($_POST['password']));
     $confirm_password = htmlspecialchars(trim($_POST['confirm_password']));
 
-    if ($password === $confirm_password) {
-
-        $sql = "INSERT INTO login (nome, email, senha) VALUES (?, ?, ?);";
-
-        $conexao = novaConexao();
-        $stmt = $conexao->prepare($sql);
-
-        $params = [
-            $nome,
-            $email,
-            $password,
-        ];
-
-        $stmt->bind_param('sss', ...$params);
-
-        if ($stmt->execute()) {
-            unset($_POST['register']);
-            $msg[] = '<div class="alert alert-primary my-1" role="alert">Usuário cadastrado com sucesso!</div>';
-        } else {
-            $msg[] = '<div class="alert alert-danger my-1" role="alert">Erro usuário não cadastrado!</div>';
-        }
+    if (existEmail($email)) {
+        $msg[] = '<div class="alert alert-danger my-1" role="alert">Email já existe na base de dados!</div>';
     } else {
-        $msg[] = '<div class="alert alert-danger my-1" role="alert">Senhas não conferem!</div>';
+        if ($password === $confirm_password) {
+
+            $sql = "INSERT INTO login (nome, email, senha) VALUES (?, ?, ?);";
+
+            $conexao = novaConexao();
+            $stmt = $conexao->prepare($sql);
+
+            //Criptografando password:
+            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+            $params = [
+                $nome,
+                $email,
+                $passwordHash
+            ];
+
+            $stmt->bind_param('sss', ...$params);
+
+            if ($stmt->execute()) {
+                unset($_POST['register']);
+                $msg[] = '<div class="alert alert-primary my-1" role="alert">Usuário cadastrado com sucesso!</div>';
+
+            } else {
+                $msg[] = '<div class="alert alert-danger my-1" role="alert">Erro: usuário não cadastrado!</div>';
+            }
+        } else {
+            $msg[] = '<div class="alert alert-danger my-1" role="alert">Senhas não conferem!</div>';
+        }
     }
+
 }
 
 ?>
@@ -63,13 +73,11 @@ if (isset($_POST['register'])) {
                 <?= $msg[0]; ?>
                 <div class="form-group">
                     <label for="name">Nome</label>
-                    <input type="text" id="name" name="name" placeholder="Digite o seu nome" class="form-control" 
-                    value="<?= $_POST['name']?>" required>
+                    <input type="text" id="name" name="name" placeholder="Digite o seu nome" class="form-control" value="<?= $_POST['name'] ?>" required>
                 </div>
                 <div class="form-group">
                     <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email" placeholder="Digite o seu e-mail" class="form-control" 
-                    value="<?= $_POST['email']?>" required>
+                    <input type="email" id="email" name="email" placeholder="Digite o seu e-mail" class="form-control" value="<?= $_POST['email'] ?>" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Senha</label>
@@ -81,10 +89,10 @@ if (isset($_POST['register'])) {
                 </div>
                 <div class="form-group">
                     <div class="btn-cadastrar">
+                        <a class=" btn btn-secondary help" href="login.php">Voltar a página de login</a>
                         <button class=" btn btn-primary help" name="register">Cadastrar</button>
-                        <a class=" btn btn-primary help" name="register">Voltar a página de login</a>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
