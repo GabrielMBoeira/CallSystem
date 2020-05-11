@@ -16,11 +16,12 @@ if (isset($_SESSION['user'])) {
 
     if (isset($_SESSION['mensagem'])) 
     $msg = '<div class="alert alert-danger" role="alert">Campos não foram preenchidos!</div>';
+    unset($_SESSION['mensagem']);
     
 } else {
     header('Location: login.php');
 }
-session_unset();
+
 ?>
 
 <main class="main">

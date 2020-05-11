@@ -1,5 +1,4 @@
 <?php
-
 require_once('src/db/conexao.php');
 require_once('src/db/validation.php');
 
