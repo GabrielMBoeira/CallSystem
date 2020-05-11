@@ -1,30 +1,36 @@
 <?php
+session_start();
+
 require_once('src/view/template_view/header.php');
 require_once('src/view/template_view/aside.php');
-
 require_once('src/db/conexao.php');
-
-$sql = "SELECT c.id, c.num_chamado, c.nota_fiscal, v.placa, v.motorista, v.telefone, c.status, c.atuante, data 
-FROM chamados AS c 
-INNER JOIN veiculos AS v
-ON c.id_placa = v.id WHERE c.status = 'aberto';";
-
-$conexao = novaConexao();
-$stmt = $conexao->prepare($sql);
-
-$resultado = $conexao->query($sql);
-
-$registros = [];
-
-if ($resultado->num_rows > 0) {
-    while ($row = $resultado->fetch_assoc()) {
-        $registros[] = $row;
+ 
+if (isset($_SESSION['user'])) {
+    $sql = "SELECT c.id, c.num_chamado, c.nota_fiscal, v.placa, v.motorista, v.telefone, c.status, c.atuante, data 
+    FROM chamados AS c 
+    INNER JOIN veiculos AS v
+    ON c.id_placa = v.id WHERE c.status = 'aberto';";
+    
+    $conexao = novaConexao();
+    $stmt = $conexao->prepare($sql);
+    
+    $resultado = $conexao->query($sql);
+    
+    $registros = [];
+    
+    if ($resultado->num_rows > 0) {
+        while ($row = $resultado->fetch_assoc()) {
+            $registros[] = $row;
+        }
+    } elseif ($conexao->error) {
+        echo "Erro: " . $conexao->error;
     }
-} elseif ($conexao->error) {
-    echo "Erro: " . $conexao->error;
+    
+    $conexao->close();
+    
+} else {
+    header('Location: login.php');
 }
-
-$conexao->close();
 
 ?>
 

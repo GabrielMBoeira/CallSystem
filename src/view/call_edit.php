@@ -1,99 +1,103 @@
-<link rel="stylesheet" href="src/assets/css/template_css/template.css">
-<link rel="stylesheet" href="src/assets/css/template_css/call_edit.css">
 
-<script src="src/assets/js/jquery.3.5.0.min.js"></script>
-<script src="src/assets/js/jquery.mask.min.js"></script>
 
 <?php
+session_start();
+
 require_once('src/view/template_view/header.php');
 require_once('src/view/template_view/aside.php');
+require_once('src/db/conexao.php');
 
-require_once "src/db/conexao.php";
+if (isset($_SESSION['user'])) {
 
-//Retornando chamados do banco de dados e populando formulário
-if (isset($_GET['num_chamado'])) {
+    //Retornando chamados do banco de dados e populando formulário
+    if (isset($_GET['num_chamado'])) {
 
-    $num_chamado = $_GET['num_chamado'];
+        $num_chamado = $_GET['num_chamado'];
 
-    $sql = "SELECT * FROM chamados WHERE num_chamado = '$num_chamado' AND (status = 'aberto' OR status = 'fechado');";
-    $conexao = novaConexao();
-    $resultado = $conexao->query($sql);
+        $sql = "SELECT * FROM chamados WHERE num_chamado = '$num_chamado' AND (status = 'aberto' OR status = 'fechado');";
+        $conexao = novaConexao();
+        $resultado = $conexao->query($sql);
 
-    $registros = [];
+        $registros = [];
 
-    if ($resultado->num_rows > 0) {
-        while ($row = $resultado->fetch_array()) {
-            $registros = $row;
+        if ($resultado->num_rows > 0) {
+            while ($row = $resultado->fetch_array()) {
+                $registros = $row;
+            }
+        } elseif ($conexao->error) {
+            echo "Erro: " . $conexao->error;
         }
-    } elseif ($conexao->error) {
-        echo "Erro: " . $conexao->error;
+        $conexao->close();
     }
-    $conexao->close();
-}
 
-if (isset($_POST['btn-salvar'])) {
+    if (isset($_POST['btn-salvar'])) {
 
-    $chave = $_POST['chave'];
-    $num_chamado = $_POST['num_chamado'];
-    $nota_fiscal = $_POST['nota_fiscal'];
-    $placa = $_POST['placa'];
-    $ocorrencia = $_POST['ocorrencia'];
-    $status = $_POST['status'];
-    $atuante = $_POST['atuante'];
-    $id_placa = $_POST['id_placa'];
+        $chave = $_POST['chave'];
+        $num_chamado = $_POST['num_chamado'];
+        $nota_fiscal = $_POST['nota_fiscal'];
+        $placa = $_POST['placa'];
+        $ocorrencia = $_POST['ocorrencia'];
+        $status = $_POST['status'];
+        $atuante = $_POST['atuante'];
+        $id_placa = $_POST['id_placa'];
 
-    $erro = [];
+        $erro = [];
 
-    if (trim($ocorrencia) === '') $erro[] = '<div class="alert alert-danger" role="alert">Ocorrência é obrigatória!</div>';
-    if (trim($status) === '') $erro[] = '<div class="alert alert-danger" role="alert">Status é obrigatório!</div>';
-    if (trim($atuante) === '') $erro[] = '<div class="alert alert-danger" role="alert">Atuante é obrigatório!</div>';
+        if (trim($ocorrencia) === '') $erro[] = '<div class="alert alert-danger" role="alert">Ocorrência é obrigatória!</div>';
+        if (trim($status) === '') $erro[] = '<div class="alert alert-danger" role="alert">Status é obrigatório!</div>';
+        if (trim($atuante) === '') $erro[] = '<div class="alert alert-danger" role="alert">Atuante é obrigatório!</div>';
 
-    if (!$erro) {
-        $sql = "INSERT INTO chamados (chave, num_chamado, nota_fiscal, placa, status, atuante, ocorrencia, id_placa) 
+        if (!$erro) {
+            $sql = "INSERT INTO chamados (chave, num_chamado, nota_fiscal, placa, status, atuante, ocorrencia, id_placa) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
-        $conexao = novaConexao();
-        $stmt = $conexao->prepare($sql);
+            $conexao = novaConexao();
+            $stmt = $conexao->prepare($sql);
 
-        $params = [
-            $chave,
-            $num_chamado,
-            $nota_fiscal,
-            $placa,
-            $status,
-            $atuante,
-            $ocorrencia,
-            $id_placa
-        ];
+            $params = [
+                $chave,
+                $num_chamado,
+                $nota_fiscal,
+                $placa,
+                $status,
+                $atuante,
+                $ocorrencia,
+                $id_placa
+            ];
 
-        $stmt->bind_param('issssssi', ...$params);
+            $stmt->bind_param('issssssi', ...$params);
 
-        $stmt->execute();
+            $stmt->execute();
 
-        $conexao->close();
+            $conexao->close();
 
-        $id = $_POST['id'];
+            $id = $_POST['id'];
 
-        $sql = "UPDATE chamados SET status = 'inativo' WHERE id = $id;";
+            $sql = "UPDATE chamados SET status = 'inativo' WHERE id = $id;";
 
-        $conexao = novaConexao();
-        $stmt = $conexao->prepare($sql);
+            $conexao = novaConexao();
+            $stmt = $conexao->prepare($sql);
 
-        $params = [
-            $id
-        ];
+            $params = [
+                $id
+            ];
 
-        $stmt->bind_param('i', ...$params);
+            $stmt->bind_param('i', ...$params);
 
-        if ($stmt->execute()) {
-            unset($_POST);
+            if ($stmt->execute()) {
+                unset($_POST);
+            }
+
+            $conexao->close();
         }
-
-        $conexao->close();
-    } 
+    }
+} else {
+    header('Location: login.php');
 }
-
 ?>
+
+<link rel="stylesheet" href="src/assets/css/template_css/template.css">
+<link rel="stylesheet" href="src/assets/css/template_css/call_edit.css">
 
 <main class="main">
 
@@ -190,10 +194,13 @@ if (isset($_POST['btn-salvar'])) {
     </div>
 </main>
 
+<script src="src/assets/js/jquery.3.5.0.min.js"></script>
+<script src="src/assets/js/jquery.mask.min.js"></script>
 <script type="text/javascript">
     //Transformanto input placa em uppercase
     $("#placa").change(function() {
         $(this).val($(this).val().toUpperCase());
+
     });
 </script>
 

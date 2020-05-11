@@ -94,6 +94,10 @@
   .nav-link:hover {
      color: #ddd;
   }
+
+  .nav-list {
+     margin-bottom: 0px;
+  }
   
   header.header ul {
      list-style: none;

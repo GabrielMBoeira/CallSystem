@@ -12,8 +12,13 @@ require_once('src/view/template_view/aside.php');
 <?php
 session_start();
 
-if (isset($_SESSION['mensagem'])) {
+if (isset($_SESSION['user'])) {
+
+    if (isset($_SESSION['mensagem'])) 
     $msg = '<div class="alert alert-danger" role="alert">Campos não foram preenchidos!</div>';
+    
+} else {
+    header('Location: login.php');
 }
 session_unset();
 ?>

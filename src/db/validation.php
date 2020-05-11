@@ -13,11 +13,12 @@ function existVehicleDB($placaDB)
     } else {
         $current = null;
     }
-    return $current;    
+    return $current;
     $conexao->close();
 }
 
-function existEmail($email) {
+function existEmail($email)
+{
 
     $sql = "SELECT * FROM login WHERE email = '$email';";
     $conexao = novaConexao();
@@ -25,7 +26,7 @@ function existEmail($email) {
 
     $dados = null;
 
-    if($resultado->num_rows > 0 ) {
+    if ($resultado->num_rows > 0) {
         $dados = $resultado->fetch_assoc();
     } else {
         $dados = null;
@@ -33,8 +34,29 @@ function existEmail($email) {
 
     return $dados;
     $conexao->close();
-   
 }
 
+function passwordValid($password, $email)
+{
 
+    $sql = "SELECT senha FROM login WHERE email = '$email';";
+    $conexao = novaConexao();
+    $resultado = $conexao->query($sql);
 
+    $senhaDB = null;
+
+    if ($resultado->num_rows > 0) {
+        $senhaDB = $resultado->fetch_row();
+        $passwordHash = $senhaDB[0];
+
+        if (password_verify($password, $passwordHash)) {
+            $validation = true;
+        } else {
+            $validation = false;
+        }
+    } else {
+        $senhaDB = null;
+    }
+    return $validation;
+    $conexao->close();
+}

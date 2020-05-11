@@ -1,6 +1,9 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="src/assets/css/template/header.css">
@@ -18,16 +21,13 @@
         </div>
         <div class="dropdown mr-5">
             <div class="dropdown-button">
-                <span>Login: Gabriel Boeira</span>
+                <span>Email: <?php echo $_SESSION['user']?></span>
                 <i class="icofont-simple-down"></i>
             </div>
             <div class="dropdown-content">
                 <ul class="nav-list">
                     <li class="nav-item">
-                        <a class="nav-link" href="">Configurações</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Sair</a>
+                        <a class="nav-link" href="logout.php">Sair</a>
                     </li>
                 </ul>
             </div>

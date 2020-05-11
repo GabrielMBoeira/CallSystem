@@ -1,80 +1,84 @@
-<link rel="stylesheet" href="src/assets/css/template_css/template.css">
-<link rel="stylesheet" href="src/assets/css/template_css/register_called.css">
-
 <?php
 require_once('src/view/template_view/header.php');
 require_once('src/view/template_view/aside.php');
-
-require_once "src/db/conexao.php";
-require_once "src/db/config.php";
+require_once('src/db/conexao.php');
+require_once('src/db/config.php');
 
 date_default_timezone_set('America/Sao_Paulo');
 
-if (count($_POST) > 0) {
-    $dados = $_POST;
-    $erros = [];
-    $msg = [];
+if (isset($_SESSION['user'])) {
 
-    if (trim($dados['nota_fiscal']) === "") {
-        $erros['nota_fiscal'] = 'Nota fiscal é obrigatória';
-    }
+    if (count($_POST) > 0) {
+        $dados = $_POST;
+        $erros = [];
+        $msg = [];
 
-    if (trim($dados['placa']) === "selecione") {
-        $erros['placa'] = 'Placa é obrigatória';
-    }
+        if (trim($dados['nota_fiscal']) === "") {
+            $erros['nota_fiscal'] = 'Nota fiscal é obrigatória';
+        }
 
-    if (trim($dados['status']) === "selecione") {
-        $erros['status'] = 'Status é obrigatório';
-    }
+        if (trim($dados['placa']) === "selecione") {
+            $erros['placa'] = 'Placa é obrigatória';
+        }
 
-    if (trim($dados['atuante']) === "selecione") {
-        $erros['atuante'] = 'Atuante é obrigatório';
-    }
+        if (trim($dados['status']) === "selecione") {
+            $erros['status'] = 'Status é obrigatório';
+        }
 
-    if (trim($dados['ocorrencia']) === "") {
-        $erros['ocorrencia'] = 'Ocorrência é obrigatória';
-    }
+        if (trim($dados['atuante']) === "selecione") {
+            $erros['atuante'] = 'Atuante é obrigatório';
+        }
 
-    if (!count($erros)) {
+        if (trim($dados['ocorrencia']) === "") {
+            $erros['ocorrencia'] = 'Ocorrência é obrigatória';
+        }
 
-        $sql = "INSERT INTO chamados (chave, num_chamado, nota_fiscal, placa, status, atuante, ocorrencia, id_placa) 
+        if (!count($erros)) {
+
+            $sql = "INSERT INTO chamados (chave, num_chamado, nota_fiscal, placa, status, atuante, ocorrencia, id_placa) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        $conexao = novaConexao();
-        $stmt = $conexao->prepare($sql);
+            $conexao = novaConexao();
+            $stmt = $conexao->prepare($sql);
 
-        
-        $optionsPlacas = explode('|', $dados['placa']);
-        $num_chamado = $dados['data'].$dados['chave'];
-        
 
-        $params = [
-            $dados['chave'], 
-            $num_chamado,
-            $dados['nota_fiscal'],
-            $optionsPlacas[1],  
-            $dados['status'],
-            $dados['atuante'],
-            $dados['ocorrencia'],
-            $optionsPlacas[0],
-        ];
+            $optionsPlacas = explode('|', $dados['placa']);
+            $num_chamado = $dados['data'] . $dados['chave'];
 
-        $stmt->bind_param("issssssi", ...$params);
 
-        if ($stmt->execute()) {
-            $msg[] = '<div class="alert alert-primary" role="alert">Chamado cadastrado com sucesso!</div>';
-            unset($dados); //Depois de inserir limpar os dados
-            unset($_POST); //Depois de inserir limpar os dados
-        } else {
-            $msg[] = '<div class="alert alert-danger" role="alert">Erro ao cadastrar chamado!</div>';
+            $params = [
+                $dados['chave'],
+                $num_chamado,
+                $dados['nota_fiscal'],
+                $optionsPlacas[1],
+                $dados['status'],
+                $dados['atuante'],
+                $dados['ocorrencia'],
+                $optionsPlacas[0],
+            ];
+
+            $stmt->bind_param("issssssi", ...$params);
+
+            if ($stmt->execute()) {
+                $msg[] = '<div class="alert alert-primary" role="alert">Chamado cadastrado com sucesso!</div>';
+                unset($dados); //Depois de inserir limpar os dados
+                unset($_POST); //Depois de inserir limpar os dados
+            } else {
+                $msg[] = '<div class="alert alert-danger" role="alert">Erro ao cadastrar chamado!</div>';
+            }
+            $conexao->close();
         }
-        $conexao->close();
     }
+} else {
+    header('Location: login.php');
 }
 ?>
 
 <script src="src/assets/js/jquery.3.5.0.min.js"></script>
 <script src="src/assets/js/jquery.mask.min.js"></script>
+
+<link rel="stylesheet" href="src/assets/css/template_css/template.css">
+<link rel="stylesheet" href="src/assets/css/template_css/register_called.css">
 
 <main class="main">
     <div class="content">
@@ -99,7 +103,7 @@ if (count($_POST) > 0) {
                     </div>
                     <div class="form-group col-md-6">
                         <label for="placa">Placa</label>
-                        <select class="form-control <?= $erros['placa'] ? 'is-invalid' : '' ?>" name="placa" >
+                        <select class="form-control <?= $erros['placa'] ? 'is-invalid' : '' ?>" name="placa">
                             <option value="selecione">Selecione a placa</option>
 
                             <?php
@@ -128,7 +132,7 @@ if (count($_POST) > 0) {
                 <div class="form-row mt-3">
                     <div class="form-group col-md-6">
                         <label for="status">Status</label>
-                        <select class="form-control <?= $erros['status'] ? 'is-invalid' : '' ?>" name="status" id="status" >
+                        <select class="form-control <?= $erros['status'] ? 'is-invalid' : '' ?>" name="status" id="status">
                             <option value="selecione" selected>Selecione o status</option>
                             <option value="aberto">Aberto</option>
                         </select>
@@ -138,7 +142,7 @@ if (count($_POST) > 0) {
                     </div>
                     <div class="form-group col-md-6">
                         <label for="atuante">Atuante</label>
-                        <select class="form-control <?= $erros['atuante'] ? 'is-invalid' : '' ?>" name="atuante" id="atuante" >
+                        <select class="form-control <?= $erros['atuante'] ? 'is-invalid' : '' ?>" name="atuante" id="atuante">
                             <option value="selecione" selected>Selecione o atuante</option>
                             <option value="setor1">Setor 1</option>
                             <option value="setor2">Setor 2</option>
@@ -151,7 +155,7 @@ if (count($_POST) > 0) {
                 </div>
                 <div class="form-group">
                     <label for="ocorrencia">Ocorrência</label>
-                    <textarea class="form-control <?= $erros['ocorrencia'] ? 'is-invalid' : '' ?>" name="ocorrencia" id="ocorrencia" rows="3" ></textarea>
+                    <textarea class="form-control <?= $erros['ocorrencia'] ? 'is-invalid' : '' ?>" name="ocorrencia" id="ocorrencia" rows="3"></textarea>
                     <div class="invalid-feedback">
                         <?= $erros['ocorrencia'] ?>
                     </div>

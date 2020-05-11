@@ -13,7 +13,7 @@ body {
 }
 
 .login-card {
-  height: 370px;
+  min-height: 330px;
   width: 400px;
   border-radius: 10px;
 }
@@ -32,18 +32,6 @@ body {
   justify-content: space-between;
 }
 
-.area-logo {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
 
-.area-logo i {
-  color: #555;
-}
-
-.area-logo i:hover {
-  color: #000;
-}
 
 

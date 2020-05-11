@@ -1,64 +1,69 @@
+<?php
+require_once('src/view/template_view/header.php');
+require_once('src/view/template_view/aside.php');
+require_once('src/db/conexao.php');
+require_once('src/db/validation.php');
+
+
+if (isset($_SESSION['user'])) {
+
+    if (count($_POST) > 0) {
+        $dados = $_POST;
+        $erros = [];
+        $msg = [];
+
+        if (trim($dados['placa']) === "") {
+            $erros['placa'] = 'Placa é obrigatória';
+        }
+
+        if (trim($dados['motorista']) === "") {
+            $erros['motorista'] = 'Motorista é obrigatório';
+        }
+
+        if (trim($dados['telefone']) === "") {
+            $erros['telefone'] = 'Telefone é obrigatório';
+        }
+
+
+        if (!count($erros) && !existVehicleDB($dados['placa'])) {
+
+
+            $sql = "INSERT INTO veiculos (placa, motorista, telefone) VALUES (?, ?, ?)";
+
+            $conexao = novaConexao();
+            $stmt = $conexao->prepare($sql);
+
+            $params = [
+                $dados['placa'],
+                $dados['motorista'],
+                $dados['telefone'],
+            ];
+
+            $stmt->bind_param("sss", ...$params);
+
+            if ($stmt->execute()) {
+                unset($dados); //Depois de inserir limpar os dados
+            }
+            $conexao->close();
+
+            $msg[] = '<div class="alert alert-primary" role="alert">Placa cadastrada com sucesso</div>';
+        } else {
+            $msg[] = '<div class="alert alert-danger" role="alert">Erro ao cadastrar: Dados incorretos ou placa já está cadastrada!</div>';
+        }
+    }
+    
+} else {
+    header('Location: login.php');
+}
+?>
+
 <link rel="stylesheet" href="src/assets/css/template_css/template.css">
 <link rel="stylesheet" href="src/assets/css/template_css/register_vehicle.css">
 
 <script src="src/assets/js/jquery.3.5.0.min.js"></script>
 <script src="src/assets/js/jquery.mask.min.js"></script>
 
-<?php
-require_once('src/view/template_view/header.php');
-require_once('src/view/template_view/aside.php');
-
-require_once "src/db/conexao.php";
-require_once "src/db/validation.php";
-
-if (count($_POST) > 0) {
-    $dados = $_POST;
-    $erros = [];
-    $msg = [];
-
-    if (trim($dados['placa']) === "") {
-        $erros['placa'] = 'Placa é obrigatória';
-    }
-
-    if (trim($dados['motorista']) === "") {
-        $erros['motorista'] = 'Motorista é obrigatório';
-    }
-
-    if (trim($dados['telefone']) === "") {
-        $erros['telefone'] = 'Telefone é obrigatório';
-    }
-
-
-    if (!count($erros) && !existVehicleDB($dados['placa'])) {
-
-
-        $sql = "INSERT INTO veiculos (placa, motorista, telefone) VALUES (?, ?, ?)";
-
-        $conexao = novaConexao();
-        $stmt = $conexao->prepare($sql);
-
-        $params = [
-            $dados['placa'],
-            $dados['motorista'],
-            $dados['telefone'],
-        ];
-
-        $stmt->bind_param("sss", ...$params);
-
-        if ($stmt->execute()) {
-            unset($dados); //Depois de inserir limpar os dados
-        }
-        $conexao->close();
-
-        $msg[] = '<div class="alert alert-primary" role="alert">Placa cadastrada com sucesso</div>';
-    } else {
-        $msg[] = '<div class="alert alert-danger" role="alert">Erro ao cadastrar: Dados incorretos ou placa já está cadastrada!</div>';
-    }
-}
-?>
-
 <main class="main">
-
     <div class="content mb-5">
         <div class="content-title">
             <i class="icon icofont-truck-alt mr-3 my-5"></i>
@@ -72,7 +77,7 @@ if (count($_POST) > 0) {
                 <div class="form-row mt-3">
                     <div class="form-group col-md-4">
                         <label for="placa">Placa</label>
-                        <input type="text" name="placa" id="placa" class="form-control <?= $erros['placa'] ? 'is-invalid' : '' ?>" style="text-transform: uppercase" value="<?= $dados['placa'] ?>" >
+                        <input type="text" name="placa" id="placa" class="form-control <?= $erros['placa'] ? 'is-invalid' : '' ?>" style="text-transform: uppercase" value="<?= $dados['placa'] ?>">
                         <div class="invalid-feedback">
                             <?= $erros['placa'] ?>
                         </div>
@@ -84,7 +89,7 @@ if (count($_POST) > 0) {
                             <?= $erros['motorista'] ?>
                         </div>
                     </div>
-                    <div class="form-group col-md-4">   
+                    <div class="form-group col-md-4">
                         <label for="telefone">Fone (Celular)</label>
                         <input type="text" name="telefone" id="telefone" class="form-control <?= $erros['telefone'] ? 'is-invalid' : '' ?>" value="<?= $dados['telefone'] ?>">
                         <div class="invalid-feedback">
