@@ -53,7 +53,7 @@
      background-color:#fff;
      border-radius: 5px;
      padding: 10px;
-     font-size: 1.2rem;
+     font-size: 1.0rem;
      font-weight: bold;
   }
   
@@ -75,16 +75,12 @@
      display: none;
   }
   
-  .nav-item {
-     font-size: 1.1rem;
-  }
-  
   .nav-item:hover {
      background-color: rgb(121, 115, 115);
   }
   
   .nav-link {
-     font-size: 1.1rem;
+     font-size: 1.0rem;
      text-decoration: none;
      cursor: pointer;
      color: #000;
@@ -106,6 +102,8 @@
   aside {
      grid-area: aside;
   }
+
+
  
  aside.aside {
     display: flex;
