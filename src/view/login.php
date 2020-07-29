@@ -30,7 +30,7 @@ if (isset($_POST['entrar'])) {
     <link rel="stylesheet" href="../src/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../src/assets/css/template_css/login.css">
     <link rel="stylesheet" href="src/assets/css/icofont.min.css">
-    <title>Call System</title>
+    <title>Call System - Chamados</title>
 </head>
 
 <body>
